@@ -5,9 +5,9 @@
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://yoursite.com/"/>
-  <updated>2020-07-11T03:44:28.682Z</updated>
-  <id>http://yoursite.com/</id>
+  <link href="https://www.xxsu.xyz/"/>
+  <updated>2020-07-19T07:37:58.476Z</updated>
+  <id>https://www.xxsu.xyz/</id>
   
   <author>
     <name>Xiao Su</name>
@@ -17,27 +17,48 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Hello World</title>
-    <link href="http://yoursite.com/2020/07/11/hello-world/"/>
-    <id>http://yoursite.com/2020/07/11/hello-world/</id>
-    <published>2020-07-11T15:47:44.000Z</published>
-    <updated>2020-07-11T03:44:28.682Z</updated>
+    <title>优美的句子</title>
+    <link href="https://www.xxsu.xyz/2020/07/19/java-algorithm-1/"/>
+    <id>https://www.xxsu.xyz/2020/07/19/java-algorithm-1/</id>
+    <published>2020-07-19T06:58:00.000Z</published>
+    <updated>2020-07-19T07:37:58.476Z</updated>
     
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
+    <content type="html"><![CDATA[<h3 id="统计单词个数"><a href="#统计单词个数" class="headerlink" title="统计单词个数"></a>统计单词个数</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.TreeMap;</span><br><span class="line"><span class="keyword">import</span> java.util.stream.Collectors;</span><br><span class="line"><span class="keyword">import</span> java.util.stream.Stream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">String text = <span class="string">"Good morning. Have a good class. "</span> + <span class="string">"Have a good visit. Have fun!"</span>;</span><br><span class="line">Stream.of(text.split(<span class="string">"[\\s+\\p&#123;P&#125;]"</span>)).parallel().filter(e -&gt; e.length() &gt; <span class="number">0</span>)</span><br><span class="line">.collect(Collectors.groupingBy(String::toLowerCase, TreeMap::<span class="keyword">new</span>, Collectors.counting()))</span><br><span class="line">.forEach((k, v) -&gt; System.out.println(k + <span class="string">" "</span> + v));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br/><h3 id="计算文件大小"><a href="#计算文件大小" class="headerlink" title="计算文件大小"></a>计算文件大小</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.nio.file.Files;</span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">long</span> <span class="title">getSize</span><span class="params">(File file)</span> </span>&#123;</span><br><span class="line"><span class="keyword">if</span> (file.isFile()) &#123;</span><br><span class="line"><span class="keyword">return</span> file.length();</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line"><span class="keyword">return</span> Files.list(file.toPath()).parallel().mapToLong(e -&gt; getSize(e.toFile())).sum();</span><br><span class="line">&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">Scanner in = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">String dir = in.nextLine();</span><br><span class="line">System.out.println(getSize(<span class="keyword">new</span> File(dir)) + <span class="string">"bytes"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
     
     <summary type="html">
     
-      想想人生也不过如此吧，你说呢？
+      分享两个java的例子
     
     </summary>
     
     
-      <category term="自由行" scheme="http://yoursite.com/categories/%E8%87%AA%E7%94%B1%E8%A1%8C/"/>
+      <category term="算法" scheme="https://www.xxsu.xyz/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-      <category term="旅游" scheme="http://yoursite.com/tags/%E6%97%85%E6%B8%B8/"/>
+      <category term="java" scheme="https://www.xxsu.xyz/tags/java/"/>
     
-      <category term="徒步" scheme="http://yoursite.com/tags/%E5%BE%92%E6%AD%A5/"/>
+  </entry>
+  
+  <entry>
+    <title>一次生活踩坑记录</title>
+    <link href="https://www.xxsu.xyz/2020/07/12/life-event-1/"/>
+    <id>https://www.xxsu.xyz/2020/07/12/life-event-1/</id>
+    <published>2020-07-12T07:46:00.000Z</published>
+    <updated>2020-07-19T08:16:34.857Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="租房踩坑"><a href="#租房踩坑" class="headerlink" title="租房踩坑"></a>租房踩坑</h3><p>第一次来到SZ，没到两天就被人给坑了，感觉自己太蠢了，太相信别人了~</p><p>事情是这样的，在接到公司发的offer后，就立即乘车来到了这座陌生的城市。由于人生地不熟，自己先住了一宿宾馆，接着第二天便开始看房子。先是从各个网站上找，电话联系，最后再去实地考察一下~</p><p> 天气比较炎热，温度30多度， 看了好几个房子，也有比较满意的，最终选择了一家性价比比较高的。她自称是房东，没有中介。在一番介绍之后便开始确定价格了。emmm，没有任何问题，完美达成一致。她说房间比较乱，需要整理，过两天来入住，我说没问题，接着她让我缴纳了定金，我也相信了她就按照她说的缴纳了，开了个定金收据。过了两天之后， 我再次来到这里，结果迎接我的并不是她了，而是她的老公，在我们签订正式租房合同的时候，马上变卦了，说签约期限，至少9个月，押二付一，然后各种公摊、卫生费…全都冒出了。最开始那个女的根本没有说有这些费用，而且说的签三个月，押一付一，我瞬间觉得自己被坑了，然后电费1.7，水费8。。。wo </p><p>在一番理论后， 我发现一个最大的问题，我没有实实在在的证据，连个录音也没有。很无奈~</p><p>而且就在第二天，我又去接着看房，这次我和一个管家约定了，达成一致了，他又让我缴纳定金，我坚持让他咨询房东，对每个合同要点进行盘问清楚，结果又是不一样的结果…..</p><p>先说各种优惠条件，让你缴纳定金，缴纳完了之后，又来另外一个人，说信息弄错了，mdzz….</p><p>wo 还是太年轻了~  </p>]]></content>
+    
+    <summary type="html">
+    
+      真实的租房踩坑记录，值得借鉴~
+    
+    </summary>
+    
+    
+      <category term="生活" scheme="https://www.xxsu.xyz/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+    
+      <category term="遇到的坑" scheme="https://www.xxsu.xyz/tags/%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/"/>
     
   </entry>
   

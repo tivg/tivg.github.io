@@ -298,16 +298,22 @@ div {
         padding: 0px 5px;
         margin: 3px;
         display: inline-block;
-        border: 1px solid #808080;
+        border: 1px solid rgba(99, 96, 96, 0.8);
         border-radius: 999em;
         color: #aaa; }
         .post .post-content .tagcloud a:hover {
           color: #fff;
-          border: 1px solid #808080;
-          background: #808080; }
+          border: 1px solid #1a8d76;
+          background: #1a8a76; }
     .post .post-content .one-tag-list {
       margin: 30px 0; }
       .post .post-content .one-tag-list .tag-name .tag-text {
+        margin-left: 5px;
+        font-size: 16px;
+        font-weight: bold; }
+    .post .post-content .one-category-list {
+      margin: 30px 0; }
+      .post .post-content .one-category-list .category-name .category-text {
         margin-left: 5px;
         font-size: 16px;
         font-weight: bold; }
@@ -1521,3 +1527,17 @@ em.search-keyword {
   color: #fff;
   background-color: #999999;
   text-shadow: 0; }
+
+.recommended_posts {
+  padding: 0.5em 1em;
+  border-left: 3px solid #6f42c1;
+  background-color: #f5f0fa; }
+  .recommended_posts li {
+    margin: 5px 0; }
+  .recommended_posts a:link {
+    color: blue; }
+  .recommended_posts a:hover {
+    text-decoration: underline;
+    color: red; }
+  .recommended_posts a:visited {
+    color: green; }

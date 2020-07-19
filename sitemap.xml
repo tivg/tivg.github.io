@@ -2,9 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://yoursite.com/2020/07/11/hello-world/</loc>
+    <loc>https://www.xxsu.xyz/2020/07/12/life-event-1/</loc>
     
-    <lastmod>2020-07-11T03:44:28.682Z</lastmod>
+    <lastmod>2020-07-19T08:16:34.857Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.xxsu.xyz/2020/07/19/java-algorithm-1/</loc>
+    
+    <lastmod>2020-07-19T07:37:58.476Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.xxsu.xyz/about/index.html</loc>
+    
+    <lastmod>2020-07-19T07:05:23.095Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.xxsu.xyz/categories/index.html</loc>
+    
+    <lastmod>2020-07-19T06:23:48.700Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.xxsu.xyz/tags/index.html</loc>
+    
+    <lastmod>2020-07-12T10:52:48.322Z</lastmod>
     
   </url>
   
