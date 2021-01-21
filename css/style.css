@@ -1541,3 +1541,52 @@ em.search-keyword {
     color: red; }
   .recommended_posts a:visited {
     color: green; }
+
+#sidebar-toc {
+  padding-left: 15px;
+  margin-top: 40px;
+  padding-bottom: 20px;
+  word-wrap: break-word; }
+
+#posttoc {
+  position: fixed;
+  margin-top: 25px; }
+
+.stoc-article {
+  position: absolute;
+  padding: 1em 1em 0 1em;
+  margin-left: 1em;
+  border-left: rgba(88, 88, 88, 0.1) 1px solid; }
+
+.stoc-title {
+  font-size: 150%; }
+
+#sidebar-stoc {
+  width: inherit;
+  line-height: 1em;
+  font-size: 0.9em;
+  float: left;
+  overflow: auto; }
+
+.stoc-fixed {
+  position: fixed;
+  top: 60px;
+  margin-top: 0;
+  max-height: 81%;
+  overflow: hidden;
+  z-index: 1; }
+
+.toc-nav {
+  padding: 0.7em 0.7em 0 0; }
+
+#stoc {
+  line-height: 1em; }
+  #stoc .toc {
+    padding: 0;
+    margin: 0.5em;
+    line-height: 1.8em; }
+    #stoc .toc li {
+      list-style-type: none; }
+  #stoc .toc-child {
+    margin-left: 1em;
+    padding-left: 0; }

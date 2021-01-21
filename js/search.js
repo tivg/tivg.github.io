@@ -14,6 +14,7 @@ var searchFunc = function(path, search_id, content_id) {
             }).get();
             var $input = document.getElementById(search_id);
             var $resultContent = document.getElementById(content_id);
+			if($input){
             $input.addEventListener('input', function(){
                 var str='<ul class=\"search-result-list\">';
                 var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
@@ -81,6 +82,7 @@ var searchFunc = function(path, search_id, content_id) {
                 str += "</ul>";
                 $resultContent.innerHTML = str;
             });
+			}
         }
     });
 }
