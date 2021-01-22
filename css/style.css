@@ -1368,12 +1368,12 @@ figure.highlight,
     padding-left: 0; }
 
 @media print, screen and (max-width: 48em) {
-  .toc-article {
+  .stoc-article {
     margin: 0em;
     max-width: 100%; }
   .clear {
     padding: 2.1em 0em 0em 0em; }
-  #toc {
+  #stoc {
     float: none; } }
 
 /* table*/
