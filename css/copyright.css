@@ -12,7 +12,7 @@
 .post-copyright  span {
   display: inline-block;
   width: 5.2em;
-  color: #b5b5b5;
+  color: #4B4B4B;
   font-weight: bold;
 }
 .post-copyright  .raw {
@@ -20,8 +20,9 @@
   width: 5em;
 }
 .post-copyright  a {
-  color: #808080;
+  color: #4B4B4B;
   border-bottom:0;
+  font-size: 0.97rem;
 }
 .post-copyright  a:hover {
   color: #a3d2a3;
