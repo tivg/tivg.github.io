@@ -1,25 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>优美的句子</title>
-    <url>/2020/07/19/java-algorithm-1/</url>
-    <content><![CDATA[<h3 id="统计单词个数"><a href="#统计单词个数" class="headerlink" title="统计单词个数"></a>统计单词个数</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.TreeMap;</span><br><span class="line"><span class="keyword">import</span> java.util.stream.Collectors;</span><br><span class="line"><span class="keyword">import</span> java.util.stream.Stream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		String text = <span class="string">"Good morning. Have a good class. "</span> + <span class="string">"Have a good visit. Have fun!"</span>;</span><br><span class="line">		Stream.of(text.split(<span class="string">"[\\s+\\p&#123;P&#125;]"</span>)).parallel().filter(e -&gt; e.length() &gt; <span class="number">0</span>)</span><br><span class="line">				.collect(Collectors.groupingBy(String::toLowerCase, TreeMap::<span class="keyword">new</span>, Collectors.counting()))</span><br><span class="line">				.forEach((k, v) -&gt; System.out.println(k + <span class="string">" "</span> + v));</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<br/>
-
-<h3 id="计算文件大小"><a href="#计算文件大小" class="headerlink" title="计算文件大小"></a>计算文件大小</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.nio.file.Files;</span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">long</span> <span class="title">getSize</span><span class="params">(File file)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (file.isFile()) &#123;</span><br><span class="line">			<span class="keyword">return</span> file.length();</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">try</span> &#123;</span><br><span class="line">				<span class="keyword">return</span> Files.list(file.toPath()).parallel().mapToLong(e -&gt; getSize(e.toFile())).sum();</span><br><span class="line">			&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		Scanner in = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">		String dir = in.nextLine();</span><br><span class="line">		System.out.println(getSize(<span class="keyword">new</span> File(dir)) + <span class="string">"bytes"</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>bat命令</title>
     <url>/2020/07/12/bat-grammar-1/</url>
     <content><![CDATA[<p>[TOC]</p>
@@ -127,6 +108,25 @@
 ]]></content>
       <categories>
         <category>数据结构</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>优美的句子</title>
+    <url>/2020/07/19/java-algorithm-1/</url>
+    <content><![CDATA[<h3 id="统计单词个数"><a href="#统计单词个数" class="headerlink" title="统计单词个数"></a>统计单词个数</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.TreeMap;</span><br><span class="line"><span class="keyword">import</span> java.util.stream.Collectors;</span><br><span class="line"><span class="keyword">import</span> java.util.stream.Stream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		String text = <span class="string">"Good morning. Have a good class. "</span> + <span class="string">"Have a good visit. Have fun!"</span>;</span><br><span class="line">		Stream.of(text.split(<span class="string">"[\\s+\\p&#123;P&#125;]"</span>)).parallel().filter(e -&gt; e.length() &gt; <span class="number">0</span>)</span><br><span class="line">				.collect(Collectors.groupingBy(String::toLowerCase, TreeMap::<span class="keyword">new</span>, Collectors.counting()))</span><br><span class="line">				.forEach((k, v) -&gt; System.out.println(k + <span class="string">" "</span> + v));</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<br/>
+
+<h3 id="计算文件大小"><a href="#计算文件大小" class="headerlink" title="计算文件大小"></a>计算文件大小</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.nio.file.Files;</span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">long</span> <span class="title">getSize</span><span class="params">(File file)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (file.isFile()) &#123;</span><br><span class="line">			<span class="keyword">return</span> file.length();</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">try</span> &#123;</span><br><span class="line">				<span class="keyword">return</span> Files.list(file.toPath()).parallel().mapToLong(e -&gt; getSize(e.toFile())).sum();</span><br><span class="line">			&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		Scanner in = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">		String dir = in.nextLine();</span><br><span class="line">		System.out.println(getSize(<span class="keyword">new</span> File(dir)) + <span class="string">"bytes"</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>算法</category>
       </categories>
       <tags>
         <tag>java</tag>
