@@ -1,1 +1,1 @@
-"use strict";!function(){var t=document.currentScript||(t=document.getElementsByTagName("script"))[t.length-1],s=$(t).attr("successtext");new ClipboardJS(".fa-clipboard").on("success",function(){s&&(toastr.options={positionClass:"toast-top-center",timeOut:"1000"},toastr.success(s))})}((window,document));
+"use strict";
