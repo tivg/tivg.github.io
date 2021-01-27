@@ -44,4 +44,15 @@
         <tag>java</tag>
       </tags>
   </entry>
+  <entry>
+    <title>JAVA并发编程-阻塞队列之ArrayBlockingQueue详解</title>
+    <url>/2020/08/01/java-concurrent-2/</url>
+    <content><![CDATA[[TOC] ArrayBlockingQueueArrayBlockingQueue 有两个构造方法，一个带fair，一个不带fair； fair为true：表示公平锁机制，FIFO； fair为false：表示非公平机制，随机； 阻塞队列，使用 一个ReentrantLock 和两个Condition 保证队列的安全； add(E e) 添加元素主要依赖于offer方法 由上可知，ArrayBlockingQueue 添加元素的最终方法还是offer方法； offer 方法一共有两个，一个是延时添加，一个是非延时添加； offer(E e)带有返回值的添加，lock加锁保证原子操作； offer(E e, long timeout, TimeUnit unit) lockInterruptibly和lock的区别 lock.lockInterruptibly()：如果当前线程未被中断则获得锁,如果当前线程被中断则出现异常； lock.lock()：即使调用了线程的interrupt()方法,也没有真正的中断线程，只是会产生中断异常，依然获取锁定 awaitNanos(long nanosTimeout) enqueue(E x)添加进入队列，通过源码可以看到，这里其实是数组 put(E e)和offer方法类似，不同之处在于没有返回值； take() poll(long timeout, TimeUnit unit) poll() peek() itemAt(int i) dequeue()出队操作，元素置空，并返回出队元素； elementDequeued() queueIsEmpty() takeIndexWrapped() clear() removedAt(int removedIndex) ArrayBlockingQueue的迭代器 小结ArrayBlockingQueue是一个数据结构为数组的阻塞队列，由ReentrantLock来实现线程安全，内部操作 由Condition的await和signal来实现等待唤醒的功能。有两种创建方式，可指定是否为公平队列和非公平队列； poll方法移除头部元素并返回，可延迟； take等待到有元素为止； peek只是返回头部元素，不移除；]]></content>
+      <categories>
+        <category>并发编程</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+      </tags>
+  </entry>
 </search>

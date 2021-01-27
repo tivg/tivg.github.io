@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://www.xxsu.xyz/2020/08/01/java-concurrent-2/</loc>
+    
+    <lastmod>2021-01-27</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://www.xxsu.xyz/2020/07/25/java-concurrent-1/</loc>
     
     <lastmod>2021-01-24</lastmod>
@@ -53,7 +60,7 @@
 
   <url>
     <loc>https://www.xxsu.xyz/</loc>
-    <lastmod>2021-01-24</lastmod>
+    <lastmod>2021-01-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -61,14 +68,14 @@
   
   <url>
     <loc>https://www.xxsu.xyz/tags/java/</loc>
-    <lastmod>2021-01-24</lastmod>
+    <lastmod>2021-01-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.xxsu.xyz/tags/bat%E5%91%BD%E4%BB%A4/</loc>
-    <lastmod>2021-01-24</lastmod>
+    <lastmod>2021-01-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -77,28 +84,28 @@
   
   <url>
     <loc>https://www.xxsu.xyz/categories/%E7%AE%97%E6%B3%95/</loc>
-    <lastmod>2021-01-24</lastmod>
+    <lastmod>2021-01-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.xxsu.xyz/categories/%E6%8A%80%E5%B7%A7/</loc>
-    <lastmod>2021-01-24</lastmod>
+    <lastmod>2021-01-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.xxsu.xyz/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</loc>
-    <lastmod>2021-01-24</lastmod>
+    <lastmod>2021-01-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.xxsu.xyz/categories/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/</loc>
-    <lastmod>2021-01-24</lastmod>
+    <lastmod>2021-01-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
