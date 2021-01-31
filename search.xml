@@ -55,4 +55,16 @@
         <tag>java</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Zygote详解</title>
+    <url>/2020/08/07/java-source-zygote-1/</url>
+    <content><![CDATA[[TOC] Zygote进程Zygote进程通过克隆的方式创建子进程，使用fork方法，会从父进程进行资源的继承；并且在启动的时候会创建 Java ART虚拟机，加载java进程所需的所有系统资源。 App_main -&gt; main()App_main.cpp cmds\App_process App_main主要工作： 创建了 ART对象，传入虚拟机所需的选项； 解析 zygote 启动参数； 调用 runtime.start 函数，根据启动 zygote 还是命令行（className），进入 ZygoteInit 或者 RuntimeInit 参数分支。 提示 app_process 可使用命令行调用，启动一个 Java 类，并调用 main 方法； argc：参数个数，argv[ ]：参数指针数组; className为空才在zygote模式下 ZygoteInit开始开机一般会打印这行日志 如果遇到不能开机的情况，这行Log没有打开，极有可能是底层的问题。 进程创建当启动一个Activity的时候，发现Activity所在进程没有被创建，就会调用这个API进程进行创建。Process.start()方法是阻塞操作，等待直到进程创建完成并返回相应的新进程pid，才完成该方法。 startViaZygote zygoteSendArgsAndGetResult将参数列表发送到Zygote进程，这将启动一个新的子进程，并返回孩子的pid。 @如果流程由于任何原因启动失败，则抛出ZygoteStartFailedEx attemptZygoteSendArgsAndGetResult zygote 进程 mainzygote 进程采用socket通信机制，代码如下 attemptUsapSendArgsAndGetResult方法]]></content>
+      <categories>
+        <category>Android</category>
+        <category>源码</category>
+      </categories>
+      <tags>
+        <tag>Zygote</tag>
+      </tags>
+  </entry>
 </search>
