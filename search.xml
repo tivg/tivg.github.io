@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>优美的句子</title>
-    <url>/2020/07/19/java-algorithm-1/</url>
+    <url>/posts/undefined/</url>
     <content><![CDATA[[TOC] 统计单词个数 计算文件大小]]></content>
       <categories>
         <category>算法</category>
@@ -13,7 +13,7 @@
   </entry>
   <entry>
     <title>bat命令</title>
-    <url>/2020/07/12/bat-grammar-1/</url>
+    <url>/posts/undefined/</url>
     <content><![CDATA[[TOC] 批处理程序 bat文件，常用于文件的批量处理，对提高工作效率很帮助。命令很简单，短短几句，掌握了之后可节约很多的时间。下面做个简单的总结，当然要全部掌握，以下这些是不够的，还需多练习，挖掘出更多的用法。 路径%~dp0 ：当前执行bat的目录，运行过程不会变化； %cd% ：bat 脚本执行时，运行的目录，随bat运行变化； 输入set /p string=请输入： 输出echo 用于输出字符串，和输出内容之间一般用空格隔离，当然也可以用逗号，推荐使用空格（在特殊情况下逗号不被允许使用） 举例： 参数%1~9 表示参数的占位符，%0不用于参数表示，表示批处理文件本身；若大于9个参数乃至更多的参数，请使用shift 标识符； 重载[&gt;&gt;]和[&gt;] 的区别，一个是追加，一个是重新写入； 字符串字符串的三大功能：截取、替换、合并 if语句 for语句文件目录操作 /d :匹配目录名 /r：递归 /l：增量递增 /f：内容提取 代码隔离setlocal和endlocal 子程序call 调用bat文件， goto到子程序，可采用 exit /b %errorlevel% 返回给父进程 路径栈pushd 和popd 路径压栈，出栈 调用程序start 开启程序 宏使用$g :重定向到设备或文件 $g$g:追加到文件末尾 $b:将宏输出给命令，同管道 $t:命令分隔符 $1-9:参数 $*:后续命令 echo off …. echo on，使得整个宏运行时不会多次换行 更多内容后续更新，点关注不迷路…]]></content>
       <categories>
         <category>技巧</category>
@@ -24,7 +24,7 @@
   </entry>
   <entry>
     <title>JAVA数据结构之Map集合</title>
-    <url>/2020/07/21/java-data-structure-1/</url>
+    <url>/posts/undefined/</url>
     <content><![CDATA[[TOC] HashMapHashMap 继承于AbstractMap，实现于Map接口；由数组加链表实现，默认大小16，加载因子0.75 众所周知，HashMap是线程不安全的，HashTable才是线程安全的，那么究竟是什么导致线程不安全的呢？ put操作，在多线程模式下，触发扩容机制，导致数据被覆盖； 但是在单线程模式下还是可以使用的，其结构采用数组+链表的形式；通过hashcode 值得到索引，再追加到链表中，当链表的长度大于8时，采用红黑树算法； 为了使其线程安全，在 java.util.Collections 集合中有个Collections.synchronizedMap包装器；该包装器可以使其达到线程安全的效果； 示例如下: 输出： 补充：hash冲突： 开发寻址法：线性探测法、二次探测法、双重哈希；链表法 HashTable而hashtable之所以线程安全，因为它的put和get操作均添加有synchronized关键字，进行同步操作，获取锁，使其他线程阻塞等待； 因为当一个线程访问hashtable的同步方法时，其他线程再次尝试访问的时候，会进入阻塞或者轮询状态，比如当线程1使用put进行元素添加的时候，线程2不但不能使用put来添加元素，而且不能使用get获取元素。 虽然达到了线程安全的效果，但是极大的降低了效率，不推荐使用； 既然HashMap是线程不安全的，而HashTable的效率又不是很高，那么有没有除了他俩之外的其他数据结构呢？ 答案当然有，如：ConcurrentHashMap等等； ConcurrentHashMap通过属性值可知，和HashMap一样，默认容量也是16，大于8转为树，并且还是线程安全的； ConcurrentHashMap 采用了一种叫做分段锁的机制，分段进行加锁，同时进行读写，大大地提高了效率；比围绕非线程安全Map的Collections.synchronizedMap包装器性能更高。 除此之外，它还提供了一些原子操作的方法： putIfAbsent putIfAbsent方法主要是在向ConcurrentHashMap中添加键—值对的时候，它会先判断该键值对是否已经存在。 如果不存在（新的entry），那么会向map中添加该键值对，并返回null； 如果已经存在，那么不会覆盖已有的值，直接返回已经存在的值； computeIfAbsent 如果 key 对应的 value 不存在，则使用获取 remappingFunction 重新计算后的值，并保存为该 key 的 value，否则返回 value。 LinkedHashMap LinkedHashMap属于HashMap的子类，与HashMap的区别在于LinkedHashMap保存了记录插入的顺序。 LinkedHashMap 是一个双向的链表，包含有链表头、尾的指针，因这个特性，所以LinkedHashMap 是有序的，而HashMap是无序的。 LinkedHashMap的构造函数中有个 accessOrder 变量，true 表示链表按访问顺序，false 表示按插入顺序； 如下所示，通过对该变量的控制，可以利用LinkedHashMap实现LruCache的核心思想; TreeMap TreeMap实现了SortedMap接口，TreeMap有能力对插入的记录根据key排序，默认按照升序排序，也可以自定义比较强，在使用TreeMap的时候，key应当实现Comparable。 TreeMap基于红黑树实现，非线程安全 ； 与HashMap比较：两者均是线程不安全的；通常情况下HashMap通常比TreeMap快些，若是使用排序选择TreeMap，其他情况则建议多使用HashMap；]]></content>
       <categories>
         <category>数据结构</category>
@@ -35,7 +35,7 @@
   </entry>
   <entry>
     <title>JAVA并发编程-原子性、可见性、有序性</title>
-    <url>/2020/07/25/java-concurrent-1/</url>
+    <url>/posts/undefined/</url>
     <content><![CDATA[[TOC] 原子性即一个操作或者多个操作 要么全部执行并且执行的过程不会被任何因素打断，要么就都不执行。 在Java中，对基本数据类型的变量的读取和赋值操作是原子性操作，是不可被中断的。 例如： 其实只有语句1是原子性操作，其他三个语句都不是原子性操作。 a++和 a = a+1包括3个操作：读取x的值，进行加1操作，写入新的值。 Java内存模型只提供了基本的读取和赋值原子操作保证，若要对大范围的操作提供原子保证，可以通过synchronized和Lock来实现，来达到线程安全。 可见性：可见性是指当多个线程访问同一个变量时，一个线程修改了这个变量的值，其他线程能够立即看得到修改的值。 对于可见性，Java提供了volatile关键字来保证可见性。 volatile关键字volatile保证了不同线程对这个变量进行操作时的可见性 1）一个线程修改了某个变量的值，这新值对其他线程来说是立即可见的（拷贝副本》修改副本》刷新回主存）； 2）禁止进行指令重排序； 举例： 若flag未加volatile 修饰，可能先于语句1执行，在多线程环境下，result还未取到结果，可flag已为true，线程2误以为result有值，便开始执行doSomething…，最后发生异常~ 除此之外，常见用volatile 关键字的地方还有双重判空的单例模式； 因 volatile关键字会在内存中产生一个内存屏障，起到阻挡作用，禁止了指令的重排。 synchronized和Lock另外，通过synchronized和Lock也能够保证可见性，synchronized和Lock能保证同一时刻只有一个线程获取锁然后执行同步代码，并且在释放锁之前会将对变量的修改刷新到主存当中。因此可以保证可见性。 有序性即程序执行的顺序按照代码的先后顺序执行。 在Java里面，可以通过volatile关键字来保证一定的“有序性”；但并不是100%，毕竟volatile无法保证操作的原子性； synchronized关键字通过加锁可以使线程达到同步，但是会产生阻塞，涉及到用户模式和内核模式的转换，这会很影响程序执行的效率。那么存在不用加锁的吗？当然有—无锁机制CAS，原子类的实现原理，放在后面讲解，这里不做讨论。 通过使用以及原理对比，我们可以发现，volatile关键字在某些情况下性能要优于synchronized，但是要注意volatile关键字是无法替代synchronized关键字的，因为volatile关键字无法保证操作的原子性！ happens-before原则摘自—-《深入理解Java虚拟机》 程序次序规则：一个线程内，按照代码顺序，书写在前面的操作先行发生于书写在后面的操作； 锁定规则：一个unLock操作先行发生于后面对同一个锁额lock操作； volatile变量规则：对一个变量的写操作先行发生于后面对这个变量的读操作； 传递规则：如果操作A先行发生于操作B，而操作B又先行发生于操作C，则可以得出操作A先行发生于操作C； 线程启动规则：Thread对象的start()方法先行发生于此线程的每个一个动作； 线程中断规则：对线程interrupt()方法的调用先行发生于被中断线程的代码检测到中断事件的发生； 线程终结规则：线程中所有的操作都先行发生于线程的终止检测，我们可以通过Thread.join()方法结束、Thread.isAlive()的返回值手段检测到线程已经终止执行； 对象终结规则：一个对象的初始化完成先行发生于他的finalize()方法的开始；]]></content>
       <categories>
         <category>并发编程</category>
@@ -46,7 +46,7 @@
   </entry>
   <entry>
     <title>JAVA并发编程-阻塞队列之ArrayBlockingQueue详解</title>
-    <url>/2020/08/01/java-concurrent-2/</url>
+    <url>/posts/undefined/</url>
     <content><![CDATA[[TOC] ArrayBlockingQueueArrayBlockingQueue 有两个构造方法，一个带fair，一个不带fair； fair为true：表示公平锁机制，FIFO； fair为false：表示非公平机制，随机； 阻塞队列，使用 一个ReentrantLock 和两个Condition 保证队列的安全； add(E e) 添加元素主要依赖于offer方法 由上可知，ArrayBlockingQueue 添加元素的最终方法还是offer方法； offer 方法一共有两个，一个是延时添加，一个是非延时添加； offer(E e)带有返回值的添加，lock加锁保证原子操作； offer(E e, long timeout, TimeUnit unit) lockInterruptibly和lock的区别 lock.lockInterruptibly()：如果当前线程未被中断则获得锁,如果当前线程被中断则出现异常； lock.lock()：即使调用了线程的interrupt()方法,也没有真正的中断线程，只是会产生中断异常，依然获取锁定 awaitNanos(long nanosTimeout) enqueue(E x)添加进入队列，通过源码可以看到，这里其实是数组 put(E e)和offer方法类似，不同之处在于没有返回值； take() poll(long timeout, TimeUnit unit) poll() peek() itemAt(int i) dequeue()出队操作，元素置空，并返回出队元素； elementDequeued() queueIsEmpty() takeIndexWrapped() clear() removedAt(int removedIndex) ArrayBlockingQueue的迭代器 小结ArrayBlockingQueue是一个数据结构为数组的阻塞队列，由ReentrantLock来实现线程安全，内部操作 由Condition的await和signal来实现等待唤醒的功能。有两种创建方式，可指定是否为公平队列和非公平队列； poll方法移除头部元素并返回，可延迟； take等待到有元素为止； peek只是返回头部元素，不移除；]]></content>
       <categories>
         <category>并发编程</category>
@@ -57,10 +57,9 @@
   </entry>
   <entry>
     <title>Zygote详解</title>
-    <url>/2020/08/07/java-source-zygote-1/</url>
+    <url>/posts/undefined/</url>
     <content><![CDATA[[TOC] Zygote进程Zygote进程通过克隆的方式创建子进程，使用fork方法，会从父进程进行资源的继承；并且在启动的时候会创建 Java ART虚拟机，加载java进程所需的所有系统资源。 App_main -&gt; main()App_main.cpp cmds\App_process App_main主要工作： 创建了 ART对象，传入虚拟机所需的选项； 解析 zygote 启动参数； 调用 runtime.start 函数，根据启动 zygote 还是命令行（className），进入 ZygoteInit 或者 RuntimeInit 参数分支。 提示 app_process 可使用命令行调用，启动一个 Java 类，并调用 main 方法； argc：参数个数，argv[ ]：参数指针数组; className为空才在zygote模式下 ZygoteInit开始开机一般会打印这行日志 如果遇到不能开机的情况，这行Log没有打开，极有可能是底层的问题。 进程创建当启动一个Activity的时候，发现Activity所在进程没有被创建，就会调用这个API进程进行创建。Process.start()方法是阻塞操作，等待直到进程创建完成并返回相应的新进程pid，才完成该方法。 startViaZygote zygoteSendArgsAndGetResult将参数列表发送到Zygote进程，这将启动一个新的子进程，并返回孩子的pid。 @如果流程由于任何原因启动失败，则抛出ZygoteStartFailedEx attemptZygoteSendArgsAndGetResult zygote 进程 mainzygote 进程采用socket通信机制，代码如下 attemptUsapSendArgsAndGetResult方法]]></content>
       <categories>
-        <category>Android</category>
         <category>源码</category>
       </categories>
       <tags>
