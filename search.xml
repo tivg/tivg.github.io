@@ -66,4 +66,15 @@
         <tag>Zygote</tag>
       </tags>
   </entry>
+  <entry>
+    <title>abbrlink踩坑</title>
+    <url>/article/856a5aa8/</url>
+    <content><![CDATA[[TOC] 博客搭建有一段时间了，但是链接地址却和文件名紧紧绑定在一起，及其不方便扩展，也给写作带来些许不便。 于是乎，今天便想着来搞搞；为了生成永久链接，这里使用abbrlink这个插件。 安装 嗯哼~ 安装失败….再来 ok了，这里配置了镜像，还是cnpm好用； 配置继续，开始配置外部的 _config.yml 大家应该都看得懂了~ 不过这里有个注意事项，auto_category 默认是true，这里我设置成false；下面是auto_category的源码： 我们来查看一下hexo-abbrlink的版本 默认安装的是最新版是2.2.1； abbrlink 的原理是在每篇文章的属性里加上一个16位/32位的十六进制的数，来作为文章唯一的id。具体内部实现依靠hexo-fs插件来进行写入生成； 执行在配置好以上内容之后，就可以开始执行生成索引了，这是最后一步了。 可执行了以上命令之后，情况又不妙了~ 报了一堆堆栈日志，通过观察，我们可以看到程序是在执行了 logic.js 之后，接着执行 fs.js 报错的；文件已存在，程序还在强行创建!!!! 为了一探究竟，我们进入到logic.js 中看看 程序是执行了这段代码导致的，如果abbrlink不存在的话，该插件会遍历文件夹中的文件进行写入，然后创建新的文件夹；继续追，查看下package.json 依赖的最新的fs是3.1。进入hexo-js中， 好家伙，直接就创建了，都不检查下的吗？？ 手动修改hexo-fs路径：\node_modules\_hexo-fs@3.1.0@hexo-fs\lib\fs.js 文件 在文件中添加以下函数： 将fs.mkdirSync 注释掉，增加 checkParentSync(path); 的调用。 最后，大功告成~:happy:]]></content>
+      <categories>
+        <category>踩坑日记</category>
+      </categories>
+      <tags>
+        <tag>abbrlink</tag>
+      </tags>
+  </entry>
 </search>
