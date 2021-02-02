@@ -1,6 +1,0 @@
----
-layout: category
-type: categories
----
-
-
