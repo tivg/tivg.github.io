@@ -77,4 +77,15 @@
         <tag>abbrlink</tag>
       </tags>
   </entry>
+  <entry>
+    <title>java并发编程-ThreadLocal</title>
+    <url>/article/b0029a08/</url>
+    <content><![CDATA[[TOC] ThreadLocalThreadLocal为变量在每个线程中都创建了一个副本，每个线程访问自己内部的副本变量，而彼此不会相互影响。 例子： 输出： 有利必有弊，虽然解决了上面说到的问题，但是每个线程都创建了变量副本，这时就要考虑它对资源的消耗，使用ThreadLocal时占用的内存资源肯定是会比没有使用的时占用的多。 在之前的文章有提到synchronized，同样是解决线程安全的，那么他俩到底有啥区别呢？ synchronized，采用的是阻塞的方式，让线程等待，保证有序进行访问；不占用其他资源，可以说是采用了时间换取空间的策略；而ThreadLocal和线程同步机制相比较，恰好相反，它采用的是以空间换取时间的策略。 下面来看下ThreadLocal的源码 set(T value) 从代码中可以看到，一个线程中的多个ThreadLocal是通过该线程的ThreadLocalMap来管理的；也就是说，每个线程都维护有一个ThreadLocalMap。当在线程中使用来自其他线程的ThreadLocal时，在set的时候，是在根据线程名查找自己线程中是否有ThreadLocalMap，若没有则创建。 ThreadLocalMap构造函数ThreadLocalMap是ThreadLocal的一个静态内部类，一个简单的Map结构，阈值为16*2/3,底层为数组，数组元素为Entry，Entry采用的是弱引用的方式。 Entry持有ThreadLocal的弱引用，而table属于ThreadLocalMap，因而，ThreadLocalMap的key采用对ThreadLocal的弱引用。弱引用的生命周期短语软引用，远短于强引用，因此，还需注意垃圾回收的情况。 get()get方法先是获取到当前线程的ThreadLocalMap，再根据ThreadLocal这个key来获取值； 根据hashcode值来进行获取数组中对应的Entry对象元素； 如果没有获取到，那么用线性碰撞的方式； 该位置置空，再哈希； remove()移除的是当前线程中ThreadLocalMap对应的ThreadLocal key值，解除弱引用； 总结 ThreadLocal为变量在每个线程中都创建了一个副本，每个线程访问自己内部的副本变量，而彼此不会相互影响； 一个ThreadLocal对应着多个ThreadLocalMap，每个ThreadLocalMap对应着一个线程； 如果我们希望通过某个类将状态(例如用户ID、事务ID)与线程关联起来，那么通常在这个类中定义private static类型的ThreadLocal 实例。]]></content>
+      <categories>
+        <category>并发编程</category>
+      </categories>
+      <tags>
+        <tag>ThreadLocal</tag>
+      </tags>
+  </entry>
 </search>
