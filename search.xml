@@ -88,4 +88,18 @@
         <tag>ThreadLocal</tag>
       </tags>
   </entry>
+  <entry>
+    <title>并发工具类的使用</title>
+    <url>/article/22df6896/</url>
+    <content><![CDATA[[TOC] 简介常见的并发工具类有这几个：CountDownLatch，CyclicBarrier，Semaphore。除此之外，还有一个不常用的线程同步器类Exchanger。 CountDownLatchCountDownLatch是一个同步计数器，当计数器等于0时，开始触发。 应用场景： 让多个线程同时阻塞在某一位置， 等待信号到来，再同时继续执行，模拟并发场景； 让单个线程等待，合并多个线程结果； 例子1： 输出 例子2: 输出： 源码分析从countDown的源码中我们可以看到，CountDownLatch内部使用了共享模式； 在构造函数中创建了Sync实例; Sync继承于AbstractQueuedSynchronizer，在构造方法中将计数器 通过setState方法设置下去了，最终给到了state变量。 CountDownLatch有个注意事项，当计数器减到0后，便不可以再次使用，需要再次new一个CountDownLatch实例对象。若要强制使用，则需要修改源码，将state值进行重置。此外，有另一个类也实现了CountDownLatch类似的功能，并且是可以重用，那就是CyclicBarrier。 CyclicBarrier利用CyclicBarrier类可以实现一组线程相互等待，当所有线程都到达某个屏障点后再进行后续的操作。 例子： 输出： 通过例子，可以看出，CyclicBarrier的效果是和CountDownLatch一致的。 源码分析 执行wait操作时，会将count值进行自减一次，当减到0时，进行触发。 观察其构造函数，可以发现，barrierAction是一个runnable对象，最终在触发的时候被调用了run方法，并没有交给子线程去做，说明还是在主线程中做的事情。 通过观察，我们发现在触发后执行了nextGeneration()方法，一探究竟，发现count值被复原了，这就是为什么CyclicBarrier可以重用的原因了。 除了CyclicBarrier之外，还有一个和CyclicBarrier类似，且计数可变，那就是Phaser，后面介绍。 SemaphoreSemaphore 信号量，用于控制在一段时间内，可并发访问执行的线程数量。控制访问特定资源的线程数目，底层依赖AQS的State。Semaphore 在计数器不为 0 的时候对线程就放行，当为0时，所有请求将被阻塞。 Semaphore 有两种模式，公平模式 和 非公平模式 ，默认是非公平模式。 公平模式就是调用 acquire 的顺序就是获取许可证的顺序，遵循 FIFO； 非公平模式是抢占式的； Semaphore的应用场景 可以用来做对公共资源的流量限制，如数据库连接。 释放公共资源许可的时候，有两种方法，一个是release，直接释放；另一个是reducePermits，释放并减少总的许可数量。 例子： 源码分析默认采用非公平锁； 静态内部类Sync继承AbstractQueuedSynchronizer；setState和getState对许可数进行设置和访问； reducePermits方法reducePermits可以动态控制总的许可证数量； ExchangerExchanger它提供一个同步点，在这个同步点两个线程可以交换彼此的数据。 想要两个线程之间进行数据交换，必然存在一个交换的时间点，在代码中用exchange来标记交互数据的位置。当两个线程均执行到exchange点时，便开启线程间数据的交换。“交换”二字也客观说明了执行该动作的是至少是两个线程，成对出现。若一个线程到达交换的时间点，而另一个线程并未到达，则该线程进行等待另一个线程。 其应用场景主要有：遗传算法、多线程数据校对等。 例子： 输出： 注意事项，在多个线程中（大于两个）使用同一个exchange，导致的结果随机选择到达交换时间点的线程进行信息交换，主要影响因素是CPU的线程调度； 源码解析 exchange方法 slotExchange方法 第一个线程到达交换时间点后，进行自选操作，等待另一个线程进行值交换；如果等待时间超时了，那么抛出超时的中断异常。 总之，每个工具类都有自己的优势和劣势，在实际开发场景中，还应根据它们的优缺点进行合适的选择。]]></content>
+      <categories>
+        <category>并发编程</category>
+      </categories>
+      <tags>
+        <tag>CountDownLatch</tag>
+        <tag>CyclicBarrier</tag>
+        <tag>Semaphore</tag>
+        <tag>Exchanger</tag>
+      </tags>
+  </entry>
 </search>
