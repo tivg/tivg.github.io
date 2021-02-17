@@ -113,4 +113,50 @@
         <tag>JavaPoet</tag>
       </tags>
   </entry>
+  <entry>
+    <title>异步流使用详解</title>
+    <url>/article/762aaa36/</url>
+    <content><![CDATA[[TOC] 异步流 挂起函数 流使用 注意使用Flow类型构建器函数： 名为 flow的 Flow类型构建器函数。 flow { ... } 构建块中的代码可以挂起。 函数 simple 不再标有 suspend 修饰符。 流使用 emit函数 发射 值。 流使用 collect 函数 收集 值。 我们可以在 simple 的 flow { ... } 函数体内使用 Thread.sleep 代替 delay 以观察主线程在本案例中被阻塞了。 flow 构建器中的代码直到流被收集的时候才运行 流的超时取消 流构建器flow { ... } 构建器是最基础的一个 flowOf 构建器定义了一个发射固定值集的流。使用 .asFlow() 扩展函数，可以将各种集合与序列转换为流。 操作符过渡流操作符 转换操作符 限长操作符 末端流操作符末端操作符： 转化为各种集合，例如 toList 与 toSet。 获取第一个（first）值与确保流发射单个（single）值的操作符。 使用 reduce 与 fold 将流规约到单个值。 输出： 55 例子过滤偶数并将其映射到字符串 通常，withContext 用于在 Kotlin 协程中改变代码的上下文，但是 flow {…} 构建器中的代码必须遵循上下文保存属性，并且不允许从其他上下文中发射（emit）。]]></content>
+      <categories>
+        <category>kotlin</category>
+      </categories>
+      <tags>
+        <tag>异步流</tag>
+        <tag>协程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>异步流的方法详解</title>
+    <url>/article/76ae8ac8/</url>
+    <content><![CDATA[[TOC] flowOn 操作符该函数用于更改流发射的上下文。 flowOn 操作符已改变流的默认顺序性。 现在收集发生在一个协程中（“coroutine#1”）而发射发生在运行于另一个线程中与收集协程并发运行的另一个协程（“coroutine#2”）中。当上游流必须改变其上下文中的 CoroutineDispatcher 的时候，flowOn 操作符创建了另一个协程。 缓冲 注意，当必须更改 CoroutineDispatcher 时，flowOn 操作符使用了相同的缓冲机制， 但是我们在这里显式地请求缓冲而不改变执行上下文。 合并当流代表部分操作结果或操作状态更新时，可能没有必要处理每个值，而是只处理最新的那个。 当收集器处理它们太慢的时候， conflate 操作符可以用于跳过中间值。 处理最新值 由于 collectLatest 的函数体需要花费 300 毫秒，但是新值每 100 秒发射一次，我们看到该代码块对每个值运行，但是只收集最后一个值： Zip方法 Combine当流表示一个变量或操作的最新值时，可能需要执行计算，这依赖于相应流的最新值，并且每当上游流产生值的时候都需要重新计算。 flatMapConcat连接模式由 flatMapConcat 与 flattenConcat 操作符实现。 flatMapMerge另一种展平模式是并发收集所有传入的流，并将它们的值合并到一个单独的流，以便尽快的发射值。 它由 flatMapMerge 与 flattenMerge 操作符实现。 flatMapLatest]]></content>
+      <categories>
+        <category>kotlin</category>
+      </categories>
+      <tags>
+        <tag>协程</tag>
+        <tag>Flow</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Android中协程的特点</title>
+    <url>/article/2905e442/</url>
+    <content><![CDATA[[TOC] Android中协程的特点 轻量：您可以在单个线程上运行多个协程，因为协程支持挂起，不会使正在运行协程的线程阻塞。挂起比阻塞节省内存，且支持多个并行操作。 内存泄漏更少：使用结构化并发机制在一个作用域内执行多项操作。 内置取消支持：取消操作会自动在运行中的整个协程层次结构内传播。 Jetpack 集成：许多 Jetpack 库都包含提供全面协程支持的扩展。某些库还提供自己的协程作用域，可供您用于结构化并发。 非受限的调度器是一种高级机制，可以在某些极端情况下提供帮助而不需要调度协程以便稍后执行或产生不希望的副作用， 因为某些操作必须立即在协程中执行。 非受限调度器不应该在通常的代码中使用。 协程可以在一个线程上挂起并在其它线程上恢复。 在不同线程间跳转使用 -Dkotlinx.coroutines.debug JVM 参数运行下面的代码 使用 runBlocking 来显式指定了一个上下文，并且另一个使用 withContext 函数来改变协程的上下文，而仍然驻留在相同的协程中 当我们不再需要某个在 newSingleThreadContext 中创建的线程的时候， 它使用了 Kotlin 标准库中的 use 函数来释放该线程。 注意，CoroutineScope 中的 isActive 只是 coroutineContext[Job]?.isActive == true 的一种方便的快捷方式。 当一个父协程被取消的时候，所有它的子协程也会被递归的取消。然而，当使用 GlobalScope 来启动一个协程时，则新协程的作业没有父作业。 因此它与这个启动的作用域无关且独立运作。 协程上下文中定义多个元素 例子]]></content>
+      <categories>
+        <category>kotlin</category>
+      </categories>
+      <tags>
+        <tag>协程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>协程详解</title>
+    <url>/article/c47eb885/</url>
+    <content><![CDATA[[TOC] 协程kotlinx.coroutines 是由 JetBrains 开发的功能丰富的协程库。它涵盖了的很多启用高级协程的原语，包括 launch、 async 等等。 本质上，协程是轻量级的线程。 它们在某些 CoroutineScope上下文中与 launch 协程构建器 一起启动。 当我们在 GlobalScope 中启动了一个新的协程，这意味着新协程的生命周期只受整个应用程序的生命周期限制。 delay是一个特殊的 挂起函数 ，它不会造成线程阻塞，但是会 挂起 协程，并且只能在协程中使用。 基础阻塞与非阻塞 非阻塞的 delay(……) 阻塞的 Thread.sleep(……) 阻塞的runBlocking{..delay(….)..} 注意： runBlocking会阻塞主线程，直到内部执行完成 例子 挂起函数单元测试 作用域构建器 runBlocking 方法会阻塞当前线程来等待； coroutineScope 只是挂起，会释放底层线程用于其他用途。 runBlocking 是常规函数，而 coroutineScope 是挂起函数。 提取函数重构 注意：在 GlobalScope 中启动的活动协程并不会使进程保活。它们就像守护线程。 取消与超时 如果协程正在执行计算任务，并且没有检查取消的话，那么它是不能被取消的 有两种方法来使执行计算的代码可以被取消。第一种方法是定期调用挂起函数来检查取消。对于这种目的 yield 是一个好的选择。 另一种方法是显式的检查取消状态。 isActive 是一个可以被使用在 CoroutineScope 中的扩展属性。 运行不能取消的代码块所有良好的关闭操作（关闭一个文件、取消一个作业、或是关闭任何一种通信通道）通常都是非阻塞的，并且不会调用任何挂起函数。 当你需要挂起一个被取消的协程，你可以将相应的代码包装在 withContext(NonCancellable) {……} 中，并使用 withContext 函数以及 NonCancellable 上下文 超时例子1 例子2 注意：该例子是安全的，因为都在同一个线程中。 async 并发在概念上，async 就类似于 launch。它启动了一个单独的协程，这是一个轻量级的线程并与其它所有的协程一起并发的工作。不同之处在于 launch 返回一个 Job 并且不附带任何结果值，而 async 返回一个 Deferred —— 一个轻量级的非阻塞 future， 这代表了一个将会在稍后提供结果的 promise。你可以使用 .await() 在一个延期的值上得到它的最终结果， 但是 Deferred 也是一个 Job，所以如果需要的话，你可以取消它。 请注意，使用协程进行并发总是显式的。 async 可以通过将 start 参数设置为 CoroutineStart.LAZY 而变为惰性的。 在这个模式下，只有结果通过 await 获取的时候协程才会启动，或者在 Job 的 start 函数调用的时候。 协程上下文与调度器所有的协程构建器诸如 launch 和 async 接收一个可选的 CoroutineContext 参数，它可以被用来显式的为一个新协程或其它上下文元素指定一个调度器。 newSingleThreadContext 为协程的运行启动了一个线程。 一个专用的线程是一种非常昂贵的资源。 在真实的应用程序中两者都必须被释放，当不再需要的时候，使用 close 函数，或存储在一个顶层变量中使它在整个应用程序中被重用。 launch(Dispatchers.Default) { …… } 与 GlobalScope.launch { …… } 使用相同的调度器。 非受限调度器 vs 受限调度器Dispatchers.Unconfined 协程调度器在调用它的线程启动了一个协程，但它仅仅只是运行到第一个挂起点。挂起后，它恢复线程中的协程，而这完全由被调用的挂起函数来决定。非受限的调度器非常适用于执行不消耗 CPU 时间的任务，以及不更新局限于特定线程的任何共享数据（如UI）的协程。]]></content>
+      <categories>
+        <category>kotlin</category>
+      </categories>
+      <tags>
+        <tag>协程</tag>
+      </tags>
+  </entry>
 </search>
