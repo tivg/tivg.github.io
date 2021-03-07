@@ -159,4 +159,60 @@
         <tag>协程</tag>
       </tags>
   </entry>
+  <entry>
+    <title>线程模型&amp;线程池</title>
+    <url>/article/a6b81681/</url>
+    <content><![CDATA[[TOC] 三种线程模型 内核级线程模型 用户级线程模型 混合型线程模型 内核级线程模型用户线程与内核线程是1对1关系。 优点：该模型在一个线程执行阻塞系统调用时，能够允许另一个线程继续执行，允许多个线程并行运行在多处理器系统上。 缺点：创建一个用户线程就要创建一个相应的内核线程。为了提升性能，大多数实现限制了系统支持的线程数量。 应用：Linux、Windows 操作系统都实现了一对一模型。 用户级线程模型用户线程与内核线程是多对1关系。映射多个用户级线程到一个内核线程。 优点：线程管理是由用户空间的线程库来完成的，因此效率更高。 缺点：如果一个线程执行阻塞系统调用，那么整个进程将会阻塞。再者，因为任一时间只有一个线程可以访问内核，所以多个线程不能并行运行在多处理核系统上。 应用：现在几乎没有系统继续使用这个模型，因为它无法利用多个处理核。 混合型线程模型用户线程与内核线程是多对多关系。 优点：开发人员可以创建任意多的用户线程，并且相应内核线程能在多处理器系统上并发执行。而且，当一个线程执行阻塞系统调用时，内核可以调度另一个线程来执行； 缺点：这种动态关联机制的实现很复杂，也需要用户自己去实现； 应用：Go语言中的并发就是使用的这种实现方式。 线程生命状态 NEW ，新建 RUNNABLE ，运行 BLOCKED ，阻塞 WAITING ，等待 TIMED_WAITING ，超时等待 TERMINATED，终结 线程实现方式 继承Thread类 实现Runnable接口 实现Callable接口 使用ExecutorService线程池 注意：其中前两种方式线程执行完后都没有返回值，后两种是带返回值的。 例子 输出： 线程池 默认线程池：ThreadPoolExecutor 定时线程池：ScheduledThreadPoolExecutor 五种线程池创建类型 newFixedThreadPool（固定大小线程池） newSingleThreadExecutor(单个后台线程） newCachedThreadPool（无界线程池，可以进行自动线程回收） newScheduledThreadPool (可调度) ​ 创建一个定长线程池，支持定时及周期性任务执行。和 其他线程池最大的区别是使用的阻塞队列是 DelayedWorkQueue，而且多了两个定时执行的方法scheduleAtFixedRate和scheduleWithFixedDelay newWorkStealingPool（并行操作） ​ JDK1.8新增newWorkStealingPool，适合使用在很耗时的操作，但是newWorkStealingPool不是ThreadPoolExecutor的扩展，它是新的线程池类ForkJoinPool的扩展，但是都是在统一的一个Executors类中实现，由于能够合理的使用CPU进行对任务操作（并行操作），所以适合使用在很耗时的任务中。]]></content>
+      <categories>
+        <category>并发编程</category>
+      </categories>
+      <tags>
+        <tag>线程池</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>生产者与消费者模式</title>
+    <url>/article/e6c2b842/</url>
+    <content><![CDATA[方式一通过使用CountDownLatch 来模拟并发场景，用synchronized来进行多线程间的同步，保障线程安全。 输出 方式二采用重入锁（ReentrantLock）机制来实现，使用了两个Condition，分别控制。 输出 当然除了以上两种方式之外，还可以用Semaphore 共享锁机制来实现以及阻塞队列的take方法，感兴趣的可以去实现一下。]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>生产者与消费者</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>单链表</title>
+    <url>/article/71c610d3/</url>
+    <content><![CDATA[[TOC] 单链表单链表创建 单链表逆序输出 反转单链表链表为：1-&gt;2-&gt;3-&gt;4。反转后为 4-&gt;3-&gt;2-&gt;1 逆序输出并未反转]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>单链表</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>几个经典的动态规划问题</title>
+    <url>/article/b2b6f046/</url>
+    <content><![CDATA[[TOC] 硬币找零 最长递增子序列 最长连续递增子序列 最长公共子序列]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>动态规划</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>算法稳定性介绍</title>
+    <url>/article/a0d5c7de/</url>
+    <content><![CDATA[[TOC] 算法分类不稳定排序算法 选择排序 — O(n²) 希尔排序 — O(nlogn) 堆排序 — O(nlogn) 快速排序 — O(nlogn) 期望时间,O(n²) 最坏情况; 稳定排序算法 冒泡排序 — O(n²) 插入排序 — O(n²) 桶排序 — O(n); 需要 O(k)额外空间 计数排序 — O(n+k); 需要O(n+k) 额外空间 合并排序 — O(nlogn); 需要O(n) 额外空间 二叉排序树排序 —O(n log n) 期望时间; O(n²)最坏时间; 需要O(n) 额外空间 基数排序 —O(n·k); 需要O(n) 额外空间 快排code]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>稳定性</tag>
+        <tag>快排</tag>
+      </tags>
+  </entry>
 </search>
