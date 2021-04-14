@@ -218,12 +218,78 @@
   <entry>
     <title>DecorView介绍</title>
     <url>/article/603b68b6/</url>
-    <content><![CDATA[[TOC] 概念DecorView: 该类继承自FrameLayout，实现了RootViewSurfaceTaker, WindowCallbacks接口。它是所有应用窗口的根View,PhoneWindow设置DecorView为应用窗口的根视图。 PhoneWindow: 该类在setContentView时，帮我们创建了一个DecorView（父类为FrameLayout）窗口顶层视图 ViewRootImpl: 是连接WindowManager与DecorView的纽带，View的整个绘制流程的三大步（measure、layout、draw）以及我们一些addView()的操作，都是通过ViewRootImpl完成的。 WindowManager: 应用程序界面和窗口管理器 源码分析Activity的的setContentView方法调用，首先进入installDecor方法，进行decorView的创建。 generateDecor方法为decorview的主要创建方法,参数为featureId，默认值为-1； generateDecor方法主要是对decorview的上下文进行创建，当拿到context、featureId、phonewindow以及windowmanage的布局参数后，便开始真正的new DecorView 对象了。 DecorView的构造方法 setWindow方法设置DecorView的mWindow变量，若当前上下文是DecorContext，也更新decorContext的mPhoneWindow值。 在DecorContext.java中,设置mPhoneWindow的值，同时从phoneWindow中获取上下文，取得context的弱引用。 流程图 补充View 提供的获取坐标方法getTop： View 自身的顶边到父View顶边的距离 getLeft： View 自身的左边到父View左边的距离 getRight： View 自身的右边到父View左边的距离 getBottom： View 自身的底边到父View上边的距离 MotionEvent 提供的获取坐标方法getX : 触摸点到当前控件左边缘的距离 getY : 触摸点当前控件顶边缘的距离 getRawX : 触摸点屏幕左边缘的距离 getRawY : 触摸点到屏幕顶边缘的距离 MeasureSpec的三种类型 UNSPECIFIED:父级没有对子级施加任何约束。 EXACTLY:父级已确定子级的确切大小 AT_MOST:子级可以根据需要的大小而定，最大可以达到指定的大小。]]></content>
+    <content><![CDATA[[TOC] 概念DecorView: 该类继承自FrameLayout，实现了RootViewSurfaceTaker, WindowCallbacks接口。它是所有应用窗口的根View,PhoneWindow设置DecorView为应用窗口的根视图。 PhoneWindow: 该类在setContentView时，帮我们创建了一个DecorView（父类为FrameLayout）窗口顶层视图 ViewRootImpl: 是连接WindowManager与DecorView的纽带，View的整个绘制流程的三大步（measure、layout、draw）以及我们一些addView()的操作，都是通过ViewRootImpl完成的。 WindowManager: 应用程序界面和窗口管理器 源码分析Activity的的setContentView方法调用，首先进入installDecor方法，进行decorView的创建。 generateDecor方法为decorview的主要创建方法,参数为featureId，默认值为-1； generateDecor方法主要是对decorview的上下文进行创建，当拿到context、featureId、phonewindow以及windowmanage的布局参数后，便开始真正的new DecorView 对象了。 DecorView的构造方法 setWindow方法设置DecorView的mWindow变量，若当前上下文是DecorContext，也更新decorContext的mPhoneWindow值。 在DecorContext.java中,设置mPhoneWindow的值，同时从phoneWindow中获取上下文，取得context的弱引用。 流程图 补充View 提供的获取坐标方法getTop： View 自身的顶边到父View顶边的距离 getLeft： View 自身的左边到父View左边的距离 getRight： View 自身的右边到父View左边的距离 getBottom： View 自身的底边到父View上边的距离 MotionEvent 提供的获取坐标方法getX : 触摸点到当前控件左边缘的距离 getY : 触摸点当前控件顶边缘的距离 getRawX : 触摸点屏幕左边缘的距离 getRawY : 触摸点到屏幕顶边缘的距离 MeasureSpec的三种类型 UNSPECIFIED:父级没有对子级施加任何约束。 EXACTLY:父级已确定子级的确切大小 AT_MOST:子级可以根据需要的大小而定，最大可以达到指定的大小。 onFinishInflate 调用时机setContentView &gt; onFinishInflate &gt; view绘制流程（performMeasure、performLayout、performDraw）]]></content>
       <categories>
         <category>Android</category>
       </categories>
       <tags>
         <tag>DecorView</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>二叉搜索树</title>
+    <url>/article/7cab1e06/</url>
+    <content><![CDATA[[TOC] 二叉搜索树]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>二叉搜索树</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>二叉树基础操作</title>
+    <url>/article/bb06284f/</url>
+    <content><![CDATA[[TOC] 二叉树基础操作]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>二叉树</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>二叉树非递归遍历</title>
+    <url>/article/1062d183/</url>
+    <content><![CDATA[[TOC] 前序遍历_非递归 中序遍历_非递归 后序遍历_非递归]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>二叉树</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>gradle命令</title>
+    <url>/article/dda7bba2/</url>
+    <content><![CDATA[[TOC] gradlew 命令详解gradlew tasks –all：查看所有任务，包括缓存任务等； gradlew clean：清除工程目录下的build文件夹； gradlew build： 检查依赖并编译打包，debug、release环境的包都会打出来； gradlew assemble：编译指定的包：如Debug包（gradlew assembleDebug）、Release包（gradlew assembleRelease）、渠道包（gradlew assembleOemRelease/assembleOemDebug）、定制的版本等等； gradlew install：编译并安装指定的包。如Debug包（gradlew installDebug）、Release包（gradlew installOemRelease/installOemDebug）、定制的版本等等； gradlew uninstall：卸载已安装的指定模式的包：如Debug包（gradlew uninstallDebug）、Release包（gradlew uninstallRelease）、渠道包（gradlew uninstallOemRelease/uninstallOemDebug）、定制的版本等等； gradlew :模块名称:dependencies ，如gradlew :app:dependencies，作用：查看包依赖关系； gradlew build -i/–info -d/–debug -s/–stacktrace：编译并打印debug模式和info等级的日志及所用异常的堆栈信息(–stacktrace)； gradlew clean build –refresh-dependencies：组合指令，清除构建并重新构建，同时强制刷新依赖(gradlew –refresh-dependencies)； gradlew –offline：离线模式，即让Gradle只使用本地cache里的依赖，如果cache中没有也不会更新依赖，而是提示编译失败； gradlew –refresh-dependencies：强制刷新依赖，即检查依赖是否有更新比如动态版本、SHA1进行本地cache和远程仓库散列码的对比等，有更新则下载更新进行构建；使用这种方式可以避免手动删除cache；–info：打印堆栈信息； gradlew –daemon：守护进程，使用Gradle的守护进程构建，能够提高构建效率，如果守护进程没启动或现有的都处于忙碌状态，就启动一个守护进程； 守护进程和守护线程的区别： 守护进程 :只会守护到主进程的代码结束 守护线程 :会守护所有其他非守护线程的结束 gradlew –no-daemon：如果你已经配置为使用守护进程构建，可以使用该选项本次不用守护进程构建； gradlew –continuous：连续构建，即任务队列中即使某个任务失败，不会终止执行，而是会继续执行下一个任务；gradlew –parallel –parallel-threads=N：并行编译； gradlew –configure-on-demand：按需编译； 依赖配置implementation：gradle会将依赖项添加到编译类路径，并将依赖项打包到编译输出。且其他模块只有在运行时才能使用该依赖项。 api：gradle会将依赖项添加到编译类路径和编译输出。当一个模块包含 api 依赖项时，会让 gradle 了解该模块要以传递方式将该依赖项导出到其他模块，以便这些模块在运行时和编译时都可以使用该依赖项。 compileOnly：gradle只会将依赖项添加到编译类路径，不会将其添加到编译输出。 runtimeOnly：gradle只会将依赖项添加到编译输出，以便在运行时使用。即，不会将其添加到编译类路径。 annotationProcessor：要添加对作为注解处理器的库的依赖关系，必须使用 annotationProcessor 配置将其添加到注解处理器类路径。]]></content>
+      <categories>
+        <category>技巧</category>
+      </categories>
+      <tags>
+        <tag>gradle</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>线程池原理</title>
+    <url>/article/335c74d5/</url>
+    <content><![CDATA[[TOC] 线程池原理优点： 能够实现复用 线程统一管理 核心参数 corePoolSize 为线程池的基本大小。 maximumPoolSize 为线程池最大线程大小。 keepAliveTime 和 unit 则是线程空闲后的存活时间。 workQueue 用于存放任务的阻塞队列。 handler 当队列和最大线程池都满了之后的饱和策略。 执行流程提交任务》核心线程是否已满》阻塞队里是否已满》线程池是否已满》拒绝策略 拒绝策略 AbortPolicy： 直接拒绝所提交的任务，并抛出RejectedExecutionException异常。 CallerRunsPolicy：只用调用者所在的线程来执行任务。 DiscardPolicy：不处理直接丢弃掉任务。 DiscardOldestPolicy：丢弃掉阻塞队列中存放时间最久的任务，执行当前任务。 延时任务与定时任务线程池可以处理延时任务，设置延迟时间执行任务 通过execute执行无返回值，而submit提交则有Future的返回值，其中get方法可以设置timeout时间，若deadline到达，还没有get到结果，则抛出异常。通过这个方法可以处理定时任务。但是值得注意的是，该方法会直接阻塞get所在线程！！若是在主线程中直接引起ui卡住，长时间超过5s则ANR。若想不卡主线程，而设置定时任务可以采用timer方式，除了这种方式外还可以采用开启守护线程方式来解决。 应用场景当需要频繁创建线程来执行任务的时候 需要延迟执行任务 多线程&amp;多任务场景以及单线程场景 其他场景例如协程。协程（kotlin）的执行环境也是线程池的应用之一。当在主线程中使用协程提交任务，这些任务会被调度到线程池的各个线程中，虽然不在同一个线程，但是能够保证一定的执行顺序。通过自定义协程调度器可以设置其执行的指定线程池。总的来说，依靠的还是线程池。 例子 输出：]]></content>
+      <categories>
+        <category>并发编程</category>
+      </categories>
+      <tags>
+        <tag>线程池</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>okhttp框架分析</title>
+    <url>/article/cec99305/</url>
+    <content><![CDATA[[TOC] OkHttp基于Socket， 和HttpUrlConnection同级但并不属于HttpUrlConnection（断点续传的关键） 目前相对主流的框架Retrofit，Glide中都是内置了OkHttp 构造函数 获取拦截器链添加各种拦截器，然后建立拦截器链，来处理对请求对象的拦截操作。 拦截器关键类为RealInterceptorChain。 一个具体的拦截器链，包含整个拦截器链：所有应用程序拦截器，OkHttp核心，所有网络拦截器，最后是网络调用者。如果该链用于应用程序拦截器，则connection必须为空。如果它是用于网络拦截器的，则connection必须为非空。 核心部分包括常见异常日志打印；拦截器的链式调用；责任链模式； 异步请求 源码分析 相关异步回调 promoteAndExecute将合格的回调从readyAsyncCalls更新到runningAsyncCalls，并在执行程序服务上运行它们。 不能以同步方式调用，因为执行调用可以调用用户代码。 @return如果调度程序当前正在运行回调，则为true。]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+      <tags>
+        <tag>okhttp</tag>
       </tags>
   </entry>
 </search>
