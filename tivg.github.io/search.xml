@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>bat命令</title>
+    <url>/article/ad6c93b9/</url>
+    <content><![CDATA[[TOC] 批处理程序 bat文件，常用于文件的批量处理，对提高工作效率很帮助。命令很简单，短短几句，掌握了之后可节约很多的时间。下面做个简单的总结，当然要全部掌握，以下这些是不够的，还需多练习，挖掘出更多的用法。 路径%~dp0 ：当前执行bat的目录，运行过程不会变化； %cd% ：bat 脚本执行时，运行的目录，随bat运行变化； 输入set /p string=请输入： 输出echo 用于输出字符串，和输出内容之间一般用空格隔离，当然也可以用逗号，推荐使用空格（在特殊情况下逗号不被允许使用） 举例： 参数%1~9 表示参数的占位符，%0不用于参数表示，表示批处理文件本身；若大于9个参数乃至更多的参数，请使用shift 标识符； 重载[&gt;&gt;]和[&gt;] 的区别，一个是追加，一个是重新写入； 字符串字符串的三大功能：截取、替换、合并 if语句 for语句文件目录操作 /d :匹配目录名 /r：递归 /l：增量递增 /f：内容提取 代码隔离setlocal和endlocal 子程序call 调用bat文件， goto到子程序，可采用 exit /b %errorlevel% 返回给父进程 路径栈pushd 和popd 路径压栈，出栈 调用程序start 开启程序 宏使用$g :重定向到设备或文件 $g$g:追加到文件末尾 $b:将宏输出给命令，同管道 $t:命令分隔符 $1-9:参数 $*:后续命令 echo off …. echo on，使得整个宏运行时不会多次换行 更多内容后续更新，点关注不迷路…]]></content>
+      <categories>
+        <category>技巧</category>
+      </categories>
+      <tags>
+        <tag>bat命令</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>优美的句子</title>
+    <url>/article/35fb243/</url>
+    <content><![CDATA[[TOC] 统计单词个数 计算文件大小]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JAVA并发编程-原子性、可见性、有序性</title>
+    <url>/article/1a8f4df9/</url>
+    <content><![CDATA[[TOC] 原子性即一个操作或者多个操作 要么全部执行并且执行的过程不会被任何因素打断，要么就都不执行。 在Java中，对基本数据类型的变量的读取和赋值操作是原子性操作，是不可被中断的。 例如： 其实只有语句1是原子性操作，其他三个语句都不是原子性操作。 a++和 a = a+1包括3个操作：读取x的值，进行加1操作，写入新的值。 Java内存模型只提供了基本的读取和赋值原子操作保证，若要对大范围的操作提供原子保证，可以通过synchronized和Lock来实现，来达到线程安全。 可见性：可见性是指当多个线程访问同一个变量时，一个线程修改了这个变量的值，其他线程能够立即看得到修改的值。 对于可见性，Java提供了volatile关键字来保证可见性。 volatile关键字volatile保证了不同线程对这个变量进行操作时的可见性 1）一个线程修改了某个变量的值，这新值对其他线程来说是立即可见的（拷贝副本》修改副本》刷新回主存）； 2）禁止进行指令重排序； 举例： 若flag未加volatile 修饰，可能先于语句1执行，在多线程环境下，result还未取到结果，可flag已为true，线程2误以为result有值，便开始执行doSomething…，最后发生异常~ 除此之外，常见用volatile 关键字的地方还有双重判空的单例模式； 因 volatile关键字会在内存中产生一个内存屏障，起到阻挡作用，禁止了指令的重排。 synchronized和Lock另外，通过synchronized和Lock也能够保证可见性，synchronized和Lock能保证同一时刻只有一个线程获取锁然后执行同步代码，并且在释放锁之前会将对变量的修改刷新到主存当中。因此可以保证可见性。 有序性即程序执行的顺序按照代码的先后顺序执行。 在Java里面，可以通过volatile关键字来保证一定的“有序性”；但并不是100%，毕竟volatile无法保证操作的原子性； synchronized关键字通过加锁可以使线程达到同步，但是会产生阻塞，涉及到用户模式和内核模式的转换，这会很影响程序执行的效率。那么存在不用加锁的吗？当然有—无锁机制CAS，原子类的实现原理，放在后面讲解，这里不做讨论。 通过使用以及原理对比，我们可以发现，volatile关键字在某些情况下性能要优于synchronized，但是要注意volatile关键字是无法替代synchronized关键字的，因为volatile关键字无法保证操作的原子性！ happens-before原则摘自—-《深入理解Java虚拟机》 程序次序规则：一个线程内，按照代码顺序，书写在前面的操作先行发生于书写在后面的操作； 锁定规则：一个unLock操作先行发生于后面对同一个锁额lock操作； volatile变量规则：对一个变量的写操作先行发生于后面对这个变量的读操作； 传递规则：如果操作A先行发生于操作B，而操作B又先行发生于操作C，则可以得出操作A先行发生于操作C； 线程启动规则：Thread对象的start()方法先行发生于此线程的每个一个动作； 线程中断规则：对线程interrupt()方法的调用先行发生于被中断线程的代码检测到中断事件的发生； 线程终结规则：线程中所有的操作都先行发生于线程的终止检测，我们可以通过Thread.join()方法结束、Thread.isAlive()的返回值手段检测到线程已经终止执行； 对象终结规则：一个对象的初始化完成先行发生于他的finalize()方法的开始；]]></content>
+      <categories>
+        <category>并发编程</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>abbrlink踩坑</title>
+    <url>/article/856a5aa8/</url>
+    <content><![CDATA[[TOC] 博客搭建有一段时间了，但是链接地址却和文件名紧紧绑定在一起，及其不方便扩展，也给写作带来些许不便。 于是乎，今天便想着来搞搞；为了生成永久链接，这里使用abbrlink这个插件。 安装 嗯哼~ 安装失败….再来 ok了，这里配置了镜像，还是cnpm好用； 配置继续，开始配置外部的 _config.yml 大家应该都看得懂了~ 不过这里有个注意事项，auto_category 默认是true，这里我设置成false；下面是auto_category的源码： 我们来查看一下hexo-abbrlink的版本 默认安装的是最新版是2.2.1； abbrlink 的原理是在每篇文章的属性里加上一个16位/32位的十六进制的数，来作为文章唯一的id。具体内部实现依靠hexo-fs插件来进行写入生成； 执行在配置好以上内容之后，就可以开始执行生成索引了，这是最后一步了。 可执行了以上命令之后，情况又不妙了~ 报了一堆堆栈日志，通过观察，我们可以看到程序是在执行了 logic.js 之后，接着执行 fs.js 报错的；文件已存在，程序还在强行创建!!!! 为了一探究竟，我们进入到logic.js 中看看 程序是执行了这段代码导致的，如果abbrlink不存在的话，该插件会遍历文件夹中的文件进行写入，然后创建新的文件夹；继续追，查看下package.json 依赖的最新的fs是3.1。进入hexo-js中， 好家伙，直接就创建了，都不检查下的吗？？ 手动修改hexo-fs路径：\node_modules\_hexo-fs@3.1.0@hexo-fs\lib\fs.js 文件 在文件中添加以下函数： 将fs.mkdirSync 注释掉，增加 checkParentSync(path); 的调用。 最后，大功告成~:happy:]]></content>
+      <categories>
+        <category>踩坑日记</category>
+      </categories>
+      <tags>
+        <tag>abbrlink</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JAVA数据结构之Map集合</title>
+    <url>/article/497b1455/</url>
+    <content><![CDATA[[TOC] HashMapHashMap 继承于AbstractMap，实现于Map接口；由数组加链表实现，默认大小16，加载因子0.75 众所周知，HashMap是线程不安全的，HashTable才是线程安全的，那么究竟是什么导致线程不安全的呢？ put操作，在多线程模式下，触发扩容机制，导致数据被覆盖； 但是在单线程模式下还是可以使用的，其结构采用数组+链表的形式；通过hashcode 值得到索引，再追加到链表中，当链表的长度大于8时，采用红黑树算法； 为了使其线程安全，在 java.util.Collections 集合中有个Collections.synchronizedMap包装器；该包装器可以使其达到线程安全的效果； 示例如下: 输出： 补充：hash冲突： 开发寻址法：线性探测法、二次探测法、双重哈希；链表法 HashTable而hashtable之所以线程安全，因为它的put和get操作均添加有synchronized关键字，进行同步操作，获取锁，使其他线程阻塞等待； 因为当一个线程访问hashtable的同步方法时，其他线程再次尝试访问的时候，会进入阻塞或者轮询状态，比如当线程1使用put进行元素添加的时候，线程2不但不能使用put来添加元素，而且不能使用get获取元素。 虽然达到了线程安全的效果，但是极大的降低了效率，不推荐使用； 既然HashMap是线程不安全的，而HashTable的效率又不是很高，那么有没有除了他俩之外的其他数据结构呢？ 答案当然有，如：ConcurrentHashMap等等； ConcurrentHashMap通过属性值可知，和HashMap一样，默认容量也是16，大于8转为树，并且还是线程安全的； ConcurrentHashMap 采用了一种叫做分段锁的机制，分段进行加锁，同时进行读写，大大地提高了效率；比围绕非线程安全Map的Collections.synchronizedMap包装器性能更高。 且在jdk1.8中对ConcurrentHashMap 进行了优化，采用compareAndSwapInt+synchronized 方式进而大大提高了效率。 除此之外，它还提供了一些原子操作的方法： putIfAbsent putIfAbsent方法主要是在向ConcurrentHashMap中添加键—值对的时候，它会先判断该键值对是否已经存在。 如果不存在（新的entry），那么会向map中添加该键值对，并返回null； 如果已经存在，那么不会覆盖已有的值，直接返回已经存在的值； computeIfAbsent 如果 key 对应的 value 不存在，则使用获取 remappingFunction 重新计算后的值，并保存为该 key 的 value，否则返回 value。 LinkedHashMap LinkedHashMap属于HashMap的子类，与HashMap的区别在于LinkedHashMap保存了记录插入的顺序。 LinkedHashMap 是一个双向的链表，包含有链表头、尾的指针，因这个特性，所以LinkedHashMap 是有序的，而HashMap是无序的。 LinkedHashMap的构造函数中有个 accessOrder 变量，true 表示链表按访问顺序，false 表示按插入顺序； 如下所示，通过对该变量的控制，可以利用LinkedHashMap实现LruCache的核心思想; TreeMap TreeMap实现了SortedMap接口，TreeMap有能力对插入的记录根据key排序，默认按照升序排序，也可以自定义比较强，在使用TreeMap的时候，key应当实现Comparable。 TreeMap基于红黑树实现，非线程安全 ； 与HashMap比较：两者均是线程不安全的；通常情况下HashMap通常比TreeMap快些，若是使用排序选择TreeMap，其他情况则建议多使用HashMap；]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>算法稳定性介绍</title>
+    <url>/article/a0d5c7de/</url>
+    <content><![CDATA[[TOC] 算法分类不稳定排序算法 选择排序 — O(n²) 希尔排序 — O(nlogn) 堆排序 — O(nlogn) 快速排序 — O(nlogn) 期望时间,O(n²) 最坏情况; 稳定排序算法 冒泡排序 — O(n²) 插入排序 — O(n²) 桶排序 — O(n); 需要 O(k)额外空间 计数排序 — O(n+k); 需要O(n+k) 额外空间 合并排序 — O(nlogn); 需要O(n) 额外空间 二叉排序树排序 —O(n log n) 期望时间; O(n²)最坏时间; 需要O(n) 额外空间 基数排序 —O(n·k); 需要O(n) 额外空间 快排code]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>稳定性</tag>
+        <tag>快排</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>几个经典的动态规划问题</title>
+    <url>/article/b2b6f046/</url>
+    <content><![CDATA[[TOC] 硬币找零 最长递增子序列 最长连续递增子序列 最长公共子序列]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>动态规划</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>生产者与消费者模式</title>
+    <url>/article/e6c2b842/</url>
+    <content><![CDATA[方式一通过使用CountDownLatch 来模拟并发场景，用synchronized来进行多线程间的同步，保障线程安全。 输出 方式二采用重入锁（ReentrantLock）机制来实现，使用了两个Condition，分别控制。 输出 当然除了以上两种方式之外，还可以用Semaphore 共享锁机制来实现以及阻塞队列的take方法，感兴趣的可以去实现一下。]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>生产者与消费者</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>单链表</title>
+    <url>/article/71c610d3/</url>
+    <content><![CDATA[[TOC] 单链表单链表创建 单链表逆序输出 反转单链表链表为：1-&gt;2-&gt;3-&gt;4。反转后为 4-&gt;3-&gt;2-&gt;1 逆序输出并未反转]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>单链表</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>java并发编程-ThreadLocal</title>
+    <url>/article/b0029a08/</url>
+    <content><![CDATA[[TOC] ThreadLocalThreadLocal为变量在每个线程中都创建了一个副本，每个线程访问自己内部的副本变量，而彼此不会相互影响。 例子： 输出： 有利必有弊，虽然解决了上面说到的问题，但是每个线程都创建了变量副本，这时就要考虑它对资源的消耗，使用ThreadLocal时占用的内存资源肯定是会比没有使用的时占用的多。 在之前的文章有提到synchronized，同样是解决线程安全的，那么他俩到底有啥区别呢？ synchronized，采用的是阻塞的方式，让线程等待，保证有序进行访问；不占用其他资源，可以说是采用了时间换取空间的策略；而ThreadLocal和线程同步机制相比较，恰好相反，它采用的是以空间换取时间的策略。 下面来看下ThreadLocal的源码 set(T value) 从代码中可以看到，一个线程中的多个ThreadLocal是通过该线程的ThreadLocalMap来管理的；也就是说，每个线程都维护有一个ThreadLocalMap。当在线程中使用来自其他线程的ThreadLocal时，在set的时候，是在根据线程名查找自己线程中是否有ThreadLocalMap，若没有则创建。 ThreadLocalMap构造函数ThreadLocalMap是ThreadLocal的一个静态内部类，一个简单的Map结构，阈值为16*2/3,底层为数组，数组元素为Entry，Entry采用的是弱引用的方式。 Entry持有ThreadLocal的弱引用，而table属于ThreadLocalMap，因而，ThreadLocalMap的key采用对ThreadLocal的弱引用。弱引用的生命周期短语软引用，远短于强引用，因此，还需注意垃圾回收的情况。 get()get方法先是获取到当前线程的ThreadLocalMap，再根据ThreadLocal这个key来获取值； 根据hashcode值来进行获取数组中对应的Entry对象元素； 如果没有获取到，那么用线性碰撞的方式； 该位置置空，再哈希； remove()移除的是当前线程中ThreadLocalMap对应的ThreadLocal key值，解除弱引用； 总结 ThreadLocal为变量在每个线程中都创建了一个副本，每个线程访问自己内部的副本变量，而彼此不会相互影响； 一个ThreadLocal对应着多个ThreadLocalMap，每个ThreadLocalMap对应着一个线程； 如果我们希望通过某个类将状态(例如用户ID、事务ID)与线程关联起来，那么通常在这个类中定义private static类型的ThreadLocal 实例。]]></content>
+      <categories>
+        <category>并发编程</category>
+      </categories>
+      <tags>
+        <tag>ThreadLocal</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JavaPoet讲解</title>
+    <url>/article/fa8ccf2d/</url>
+    <content><![CDATA[[TOC] JavaPoetJavaPoet是Square推出的开源Java代码生成框架，提供Java Api生成.java源文件。通过这个框架可以很方便的使用它根据注解、数据库模式、协议格式等来对应生成代码。用这种自动化生产代码的方式可以来替换冗杂重复的工作，提高工作效率。 代码生成技术相当于元编程，可用于编译期根据注解等元数据动态生成Java类。在框架Dagger、ButterKnife等等中就是利用JavaPoet注解的方式实现生成所需的类。 常用类 JavaFile：用于构造输出包含一个顶级类的Java文件，是对.java文件的抽象； TypeSpec：TypeSpec是类/接口/枚举的抽象； MethodSpec：MethodSpec是方法/构造函数的抽象； FieldSpec：FieldSpec是成员变量/字段的抽象； ParameterSpec：ParameterSpec用于创建参数； AnnotationSpec：AnnotationSpec用于创建注解； TypeName：类型； ClassName：用来包装一个类； 占位符 $L 参数，方法中的参数； $S 字符串，和String.format中%s一样； $N 方法或变量的名称，我们自己生成的方法名或者变量名等等； $T 类型名，指的是TypeName，该模板主要将Class抽象出来，用传入的TypeName指向的Class来代替； 设置方法抛出异常,可以使用addException方法,传入指定的异常的ClassName,即可为该方法设置其抛出该异常. 步骤添加依赖 一般情况下，还需要配合注解解释器来使用才行，一般我们常用的或注解解释器为 AutoService 和 gradle-incap-helper。 自定义处理器注解处理器（Annotation Processor）是javac的一个工具，它用来在编译时扫描和处理注解（Annotation）。你可以自定义注解，并注册相应的注解处理器（自定义的注解处理器需继承自AbstractProcessor）。 注意：注解处理器是运行在独立的虚拟机JVM中，javac启动一个完整Java虚拟机来运行注解处理器。 相关方法 init(ProcessingEnvironment env): 初始化方法，会被注解处理器调用，可以从ProcessingEnviroment对象中获取到如Elements, Types,Messager和Filer等工具类； process(Set&lt; ? extends TypeElement&gt; annotations, RoundEnvironment env): 真正的处理方法，也是核心的方法。在这里写如何处理注解的代码，以及生成的java文件需要存放的位置。参数RoundEnviroment可以查询出包含特定注解的被注解元素。 getSupportedAnnotationTypes(): 指定注解处理器是注册给哪个注解的。返回值是一个字符串的集合，包含本处理器想要处理的注解类型的合法全称。 getSupportedSourceVersion(): 用来指定你使用的Java版本。通常返回SourceVersion.latestSupported()。 技巧：后面两个方法还有另一种写法（通过注解给定） 实现 思考kapt和transform的差别AbstractProcessor只能处理注解，然后根据注解通过javapoet生成一个新的java类。而transfrom则是通过gradle插件的transfrom方法，对.class文件做的修改。 AbstractProcessor是一个抽象类，它的父类是Processer。Processor会在编译阶段初始化，然后对当前模块内的代码进行一次扫描，然后获取到对应的注解，之后调用process方法，然后我们根据这些注解类来做一些后续操作。 编译过程source(源代码) -&gt; processor（处理器） -&gt; generate （文件生成）-&gt; javacompiler -&gt; .class文件 -&gt; .dex(只针对安卓)。 官方链接：https://github.com/square/javapoet]]></content>
+      <categories>
+        <category>框架</category>
+      </categories>
+      <tags>
+        <tag>JavaPoet</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>线程模型&amp;线程池</title>
+    <url>/article/a6b81681/</url>
+    <content><![CDATA[[TOC] 三种线程模型 内核级线程模型 用户级线程模型 混合型线程模型 内核级线程模型用户线程与内核线程是1对1关系。 优点：该模型在一个线程执行阻塞系统调用时，能够允许另一个线程继续执行，允许多个线程并行运行在多处理器系统上。 缺点：创建一个用户线程就要创建一个相应的内核线程。为了提升性能，大多数实现限制了系统支持的线程数量。 应用：Linux、Windows 操作系统都实现了一对一模型。 用户级线程模型用户线程与内核线程是多对1关系。映射多个用户级线程到一个内核线程。 优点：线程管理是由用户空间的线程库来完成的，因此效率更高。 缺点：如果一个线程执行阻塞系统调用，那么整个进程将会阻塞。再者，因为任一时间只有一个线程可以访问内核，所以多个线程不能并行运行在多处理核系统上。 应用：现在几乎没有系统继续使用这个模型，因为它无法利用多个处理核。 混合型线程模型用户线程与内核线程是多对多关系。 优点：开发人员可以创建任意多的用户线程，并且相应内核线程能在多处理器系统上并发执行。而且，当一个线程执行阻塞系统调用时，内核可以调度另一个线程来执行； 缺点：这种动态关联机制的实现很复杂，也需要用户自己去实现； 应用：Go语言中的并发就是使用的这种实现方式。 线程生命状态 NEW ，新建 RUNNABLE ，运行 BLOCKED ，阻塞 WAITING ，等待 TIMED_WAITING ，超时等待 TERMINATED，终结 线程实现方式 继承Thread类 实现Runnable接口 实现Callable接口 使用ExecutorService线程池 注意：其中前两种方式线程执行完后都没有返回值，后两种是带返回值的。 例子 输出： 线程池 默认线程池：ThreadPoolExecutor 定时线程池：ScheduledThreadPoolExecutor 五种线程池创建类型 newFixedThreadPool（固定大小线程池） newSingleThreadExecutor(单个后台线程） newCachedThreadPool（无界线程池，可以进行自动线程回收） newScheduledThreadPool (可调度) ​ 创建一个定长线程池，支持定时及周期性任务执行。和 其他线程池最大的区别是使用的阻塞队列是 DelayedWorkQueue，而且多了两个定时执行的方法scheduleAtFixedRate和scheduleWithFixedDelay newWorkStealingPool（并行操作） ​ JDK1.8新增newWorkStealingPool，适合使用在很耗时的操作，但是newWorkStealingPool不是ThreadPoolExecutor的扩展，它是新的线程池类ForkJoinPool的扩展，但是都是在统一的一个Executors类中实现，由于能够合理的使用CPU进行对任务操作（并行操作），所以适合使用在很耗时的任务中。]]></content>
+      <categories>
+        <category>并发编程</category>
+      </categories>
+      <tags>
+        <tag>线程池</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>异步流使用详解</title>
+    <url>/article/762aaa36/</url>
+    <content><![CDATA[[TOC] 异步流 挂起函数 流使用 注意使用Flow类型构建器函数： 名为 flow的 Flow类型构建器函数。 flow { ... } 构建块中的代码可以挂起。 函数 simple 不再标有 suspend 修饰符。 流使用 emit函数 发射 值。 流使用 collect 函数 收集 值。 我们可以在 simple 的 flow { ... } 函数体内使用 Thread.sleep 代替 delay 以观察主线程在本案例中被阻塞了。 flow 构建器中的代码直到流被收集的时候才运行 流的超时取消 流构建器flow { ... } 构建器是最基础的一个 flowOf 构建器定义了一个发射固定值集的流。使用 .asFlow() 扩展函数，可以将各种集合与序列转换为流。 操作符过渡流操作符 转换操作符 限长操作符 末端流操作符末端操作符： 转化为各种集合，例如 toList 与 toSet。 获取第一个（first）值与确保流发射单个（single）值的操作符。 使用 reduce 与 fold 将流规约到单个值。 输出： 55 例子过滤偶数并将其映射到字符串 通常，withContext 用于在 Kotlin 协程中改变代码的上下文，但是 flow {…} 构建器中的代码必须遵循上下文保存属性，并且不允许从其他上下文中发射（emit）。]]></content>
+      <categories>
+        <category>kotlin</category>
+      </categories>
+      <tags>
+        <tag>异步流</tag>
+        <tag>协程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Android中协程的特点</title>
+    <url>/article/2905e442/</url>
+    <content><![CDATA[[TOC] Android中协程的特点 轻量：您可以在单个线程上运行多个协程，因为协程支持挂起，不会使正在运行协程的线程阻塞。挂起比阻塞节省内存，且支持多个并行操作。 内存泄漏更少：使用结构化并发机制在一个作用域内执行多项操作。 内置取消支持：取消操作会自动在运行中的整个协程层次结构内传播。 Jetpack 集成：许多 Jetpack 库都包含提供全面协程支持的扩展。某些库还提供自己的协程作用域，可供您用于结构化并发。 非受限的调度器是一种高级机制，可以在某些极端情况下提供帮助而不需要调度协程以便稍后执行或产生不希望的副作用， 因为某些操作必须立即在协程中执行。 非受限调度器不应该在通常的代码中使用。 协程可以在一个线程上挂起并在其它线程上恢复。 在不同线程间跳转使用 -Dkotlinx.coroutines.debug JVM 参数运行下面的代码 使用 runBlocking 来显式指定了一个上下文，并且另一个使用 withContext 函数来改变协程的上下文，而仍然驻留在相同的协程中 当我们不再需要某个在 newSingleThreadContext 中创建的线程的时候， 它使用了 Kotlin 标准库中的 use 函数来释放该线程。 注意，CoroutineScope 中的 isActive 只是 coroutineContext[Job]?.isActive == true 的一种方便的快捷方式。 当一个父协程被取消的时候，所有它的子协程也会被递归的取消。然而，当使用 GlobalScope 来启动一个协程时，则新协程的作业没有父作业。 因此它与这个启动的作用域无关且独立运作。 协程上下文中定义多个元素 例子]]></content>
+      <categories>
+        <category>kotlin</category>
+      </categories>
+      <tags>
+        <tag>协程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>异步流的方法详解</title>
+    <url>/article/76ae8ac8/</url>
+    <content><![CDATA[[TOC] flowOn 操作符该函数用于更改流发射的上下文。 flowOn 操作符已改变流的默认顺序性。 现在收集发生在一个协程中（“coroutine#1”）而发射发生在运行于另一个线程中与收集协程并发运行的另一个协程（“coroutine#2”）中。当上游流必须改变其上下文中的 CoroutineDispatcher 的时候，flowOn 操作符创建了另一个协程。 缓冲 注意，当必须更改 CoroutineDispatcher 时，flowOn 操作符使用了相同的缓冲机制， 但是我们在这里显式地请求缓冲而不改变执行上下文。 合并当流代表部分操作结果或操作状态更新时，可能没有必要处理每个值，而是只处理最新的那个。 当收集器处理它们太慢的时候， conflate 操作符可以用于跳过中间值。 处理最新值 由于 collectLatest 的函数体需要花费 300 毫秒，但是新值每 100 秒发射一次，我们看到该代码块对每个值运行，但是只收集最后一个值： Zip方法 Combine当流表示一个变量或操作的最新值时，可能需要执行计算，这依赖于相应流的最新值，并且每当上游流产生值的时候都需要重新计算。 flatMapConcat连接模式由 flatMapConcat 与 flattenConcat 操作符实现。 flatMapMerge另一种展平模式是并发收集所有传入的流，并将它们的值合并到一个单独的流，以便尽快的发射值。 它由 flatMapMerge 与 flattenMerge 操作符实现。 flatMapLatest]]></content>
+      <categories>
+        <category>kotlin</category>
+      </categories>
+      <tags>
+        <tag>协程</tag>
+        <tag>Flow</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JAVA并发编程-阻塞队列之ArrayBlockingQueue详解</title>
+    <url>/article/5a190551/</url>
+    <content><![CDATA[[TOC] ArrayBlockingQueueArrayBlockingQueue 有两个构造方法，一个带fair，一个不带fair； fair为true：表示公平锁机制，FIFO； fair为false：表示非公平机制，随机； 阻塞队列，使用 一个ReentrantLock 和两个Condition 保证队列的安全； add(E e) 添加元素主要依赖于offer方法 由上可知，ArrayBlockingQueue 添加元素的最终方法还是offer方法； offer 方法一共有两个，一个是延时添加，一个是非延时添加； offer(E e)带有返回值的添加，lock加锁保证原子操作； offer(E e, long timeout, TimeUnit unit) lockInterruptibly和lock的区别 lock.lockInterruptibly()：如果当前线程未被中断则获得锁,如果当前线程被中断则出现异常； lock.lock()：即使调用了线程的interrupt()方法,也没有真正的中断线程，只是会产生中断异常，依然获取锁定 awaitNanos(long nanosTimeout) enqueue(E x)添加进入队列，通过源码可以看到，这里其实是数组 put(E e)和offer方法类似，不同之处在于没有返回值； take() poll(long timeout, TimeUnit unit) poll() peek() itemAt(int i) dequeue()出队操作，元素置空，并返回出队元素； elementDequeued() queueIsEmpty() takeIndexWrapped() clear() removedAt(int removedIndex) ArrayBlockingQueue的迭代器 小结ArrayBlockingQueue是一个数据结构为数组的阻塞队列，由ReentrantLock来实现线程安全，内部操作 由Condition的await和signal来实现等待唤醒的功能。有两种创建方式，可指定是否为公平队列和非公平队列； poll方法移除头部元素并返回，可延迟； take等待到有元素为止； peek只是返回头部元素，不移除；]]></content>
+      <categories>
+        <category>并发编程</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>并发工具类的使用</title>
+    <url>/article/22df6896/</url>
+    <content><![CDATA[[TOC] 简介常见的并发工具类有这几个：CountDownLatch，CyclicBarrier，Semaphore。除此之外，还有一个不常用的线程同步器类Exchanger。 CountDownLatchCountDownLatch是一个同步计数器，当计数器等于0时，开始触发。 应用场景： 让多个线程同时阻塞在某一位置， 等待信号到来，再同时继续执行，模拟并发场景； 让单个线程等待，合并多个线程结果； 例子1： 输出 例子2: 输出： 源码分析从countDown的源码中我们可以看到，CountDownLatch内部使用了共享模式； 在构造函数中创建了Sync实例; Sync继承于AbstractQueuedSynchronizer，在构造方法中将计数器 通过setState方法设置下去了，最终给到了state变量。 CountDownLatch有个注意事项，当计数器减到0后，便不可以再次使用，需要再次new一个CountDownLatch实例对象。若要强制使用，则需要修改源码，将state值进行重置。此外，有另一个类也实现了CountDownLatch类似的功能，并且是可以重用，那就是CyclicBarrier。 CyclicBarrier利用CyclicBarrier类可以实现一组线程相互等待，当所有线程都到达某个屏障点后再进行后续的操作。 例子： 输出： 通过例子，可以看出，CyclicBarrier的效果是和CountDownLatch一致的。 源码分析 执行wait操作时，会将count值进行自减一次，当减到0时，进行触发。 观察其构造函数，可以发现，barrierAction是一个runnable对象，最终在触发的时候被调用了run方法，并没有交给子线程去做，说明还是在主线程中做的事情。 通过观察，我们发现在触发后执行了nextGeneration()方法，一探究竟，发现count值被复原了，这就是为什么CyclicBarrier可以重用的原因了。 除了CyclicBarrier之外，还有一个和CyclicBarrier类似，且计数可变，那就是Phaser，后面介绍。 SemaphoreSemaphore 信号量，用于控制在一段时间内，可并发访问执行的线程数量。控制访问特定资源的线程数目，底层依赖AQS的State。Semaphore 在计数器不为 0 的时候对线程就放行，当为0时，所有请求将被阻塞。 Semaphore 有两种模式，公平模式 和 非公平模式 ，默认是非公平模式。 公平模式就是调用 acquire 的顺序就是获取许可证的顺序，遵循 FIFO； 非公平模式是抢占式的； Semaphore的应用场景 可以用来做对公共资源的流量限制，如数据库连接。 释放公共资源许可的时候，有两种方法，一个是release，直接释放；另一个是reducePermits，释放并减少总的许可数量。 例子： 源码分析默认采用非公平锁； 静态内部类Sync继承AbstractQueuedSynchronizer；setState和getState对许可数进行设置和访问； reducePermits方法reducePermits可以动态控制总的许可证数量； ExchangerExchanger它提供一个同步点，在这个同步点两个线程可以交换彼此的数据。 想要两个线程之间进行数据交换，必然存在一个交换的时间点，在代码中用exchange来标记交互数据的位置。当两个线程均执行到exchange点时，便开启线程间数据的交换。“交换”二字也客观说明了执行该动作的是至少是两个线程，成对出现。若一个线程到达交换的时间点，而另一个线程并未到达，则该线程进行等待另一个线程。 其应用场景主要有：遗传算法、多线程数据校对等。 例子： 输出： 注意事项，在多个线程中（大于两个）使用同一个exchange，导致的结果随机选择到达交换时间点的线程进行信息交换，主要影响因素是CPU的线程调度； 源码解析 exchange方法 slotExchange方法 第一个线程到达交换时间点后，进行自选操作，等待另一个线程进行值交换；如果等待时间超时了，那么抛出超时的中断异常。 总之，每个工具类都有自己的优势和劣势，在实际开发场景中，还应根据它们的优缺点进行合适的选择。]]></content>
+      <categories>
+        <category>并发编程</category>
+      </categories>
+      <tags>
+        <tag>CountDownLatch</tag>
+        <tag>CyclicBarrier</tag>
+        <tag>Semaphore</tag>
+        <tag>Exchanger</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>协程详解</title>
+    <url>/article/c47eb885/</url>
+    <content><![CDATA[[TOC] 协程kotlinx.coroutines 是由 JetBrains 开发的功能丰富的协程库。它涵盖了的很多启用高级协程的原语，包括 launch、 async 等等。 本质上，协程是轻量级的线程。 它们在某些 CoroutineScope上下文中与 launch 协程构建器 一起启动。 当我们在 GlobalScope 中启动了一个新的协程，这意味着新协程的生命周期只受整个应用程序的生命周期限制。 delay是一个特殊的 挂起函数 ，它不会造成线程阻塞，但是会 挂起 协程，并且只能在协程中使用。 基础阻塞与非阻塞 非阻塞的 delay(……) 阻塞的 Thread.sleep(……) 阻塞的runBlocking{..delay(….)..} 注意： runBlocking会阻塞主线程，直到内部执行完成 例子 挂起函数单元测试 作用域构建器 runBlocking 方法会阻塞当前线程来等待； coroutineScope 只是挂起，会释放底层线程用于其他用途。 runBlocking 是常规函数，而 coroutineScope 是挂起函数。 提取函数重构 注意：在 GlobalScope 中启动的活动协程并不会使进程保活。它们就像守护线程。 取消与超时 如果协程正在执行计算任务，并且没有检查取消的话，那么它是不能被取消的 有两种方法来使执行计算的代码可以被取消。第一种方法是定期调用挂起函数来检查取消。对于这种目的 yield 是一个好的选择。 另一种方法是显式的检查取消状态。 isActive 是一个可以被使用在 CoroutineScope 中的扩展属性。 运行不能取消的代码块所有良好的关闭操作（关闭一个文件、取消一个作业、或是关闭任何一种通信通道）通常都是非阻塞的，并且不会调用任何挂起函数。 当你需要挂起一个被取消的协程，你可以将相应的代码包装在 withContext(NonCancellable) {……} 中，并使用 withContext 函数以及 NonCancellable 上下文 超时例子1 例子2 注意：该例子是安全的，因为都在同一个线程中。 async 并发在概念上，async 就类似于 launch。它启动了一个单独的协程，这是一个轻量级的线程并与其它所有的协程一起并发的工作。不同之处在于 launch 返回一个 Job 并且不附带任何结果值，而 async 返回一个 Deferred —— 一个轻量级的非阻塞 future， 这代表了一个将会在稍后提供结果的 promise。你可以使用 .await() 在一个延期的值上得到它的最终结果， 但是 Deferred 也是一个 Job，所以如果需要的话，你可以取消它。 请注意，使用协程进行并发总是显式的。 async 可以通过将 start 参数设置为 CoroutineStart.LAZY 而变为惰性的。 在这个模式下，只有结果通过 await 获取的时候协程才会启动，或者在 Job 的 start 函数调用的时候。 协程上下文与调度器所有的协程构建器诸如 launch 和 async 接收一个可选的 CoroutineContext 参数，它可以被用来显式的为一个新协程或其它上下文元素指定一个调度器。 newSingleThreadContext 为协程的运行启动了一个线程。 一个专用的线程是一种非常昂贵的资源。 在真实的应用程序中两者都必须被释放，当不再需要的时候，使用 close 函数，或存储在一个顶层变量中使它在整个应用程序中被重用。 launch(Dispatchers.Default) { …… } 与 GlobalScope.launch { …… } 使用相同的调度器。 非受限调度器 vs 受限调度器Dispatchers.Unconfined 协程调度器在调用它的线程启动了一个协程，但它仅仅只是运行到第一个挂起点。挂起后，它恢复线程中的协程，而这完全由被调用的挂起函数来决定。非受限的调度器非常适用于执行不消耗 CPU 时间的任务，以及不更新局限于特定线程的任何共享数据（如UI）的协程。]]></content>
+      <categories>
+        <category>kotlin</category>
+      </categories>
+      <tags>
+        <tag>协程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Zygote详解</title>
+    <url>/article/8b3b35/</url>
+    <content><![CDATA[[TOC] Zygote进程Zygote进程通过克隆的方式创建子进程，使用fork方法，会从父进程进行资源的继承；并且在启动的时候会创建 Java ART虚拟机，加载java进程所需的所有系统资源。 App_main -&gt; main()App_main.cpp cmds\App_process App_main主要工作： 创建了 ART对象，传入虚拟机所需的选项； 解析 zygote 启动参数； 调用 runtime.start 函数，根据启动 zygote 还是命令行（className），进入 ZygoteInit 或者 RuntimeInit 参数分支。 提示 app_process 可使用命令行调用，启动一个 Java 类，并调用 main 方法； argc：参数个数，argv[ ]：参数指针数组; className为空才在zygote模式下 ZygoteInit开始开机一般会打印这行日志 如果遇到不能开机的情况，这行Log没有打开，极有可能是底层的问题。 进程创建当启动一个Activity的时候，发现Activity所在进程没有被创建，就会调用这个API进程进行创建。Process.start()方法是阻塞操作，等待直到进程创建完成并返回相应的新进程pid，才完成该方法。 startViaZygote zygoteSendArgsAndGetResult将参数列表发送到Zygote进程，这将启动一个新的子进程，并返回孩子的pid。 @如果流程由于任何原因启动失败，则抛出ZygoteStartFailedEx attemptZygoteSendArgsAndGetResult zygote 进程 mainzygote 进程采用socket通信机制，代码如下 attemptUsapSendArgsAndGetResult方法 流程图]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+      <tags>
+        <tag>Zygote</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>DecorView介绍</title>
+    <url>/article/603b68b6/</url>
+    <content><![CDATA[[TOC] 概念DecorView: 该类继承自FrameLayout，实现了RootViewSurfaceTaker, WindowCallbacks接口。它是所有应用窗口的根View,PhoneWindow设置DecorView为应用窗口的根视图。 PhoneWindow: 该类在setContentView时，帮我们创建了一个DecorView（父类为FrameLayout）窗口顶层视图 ViewRootImpl: 是连接WindowManager与DecorView的纽带，View的整个绘制流程的三大步（measure、layout、draw）以及我们一些addView()的操作，都是通过ViewRootImpl完成的。 WindowManager: 应用程序界面和窗口管理器 源码分析Activity的的setContentView方法调用，首先进入installDecor方法，进行decorView的创建。 generateDecor方法为decorview的主要创建方法,参数为featureId，默认值为-1； generateDecor方法主要是对decorview的上下文进行创建，当拿到context、featureId、phonewindow以及windowmanage的布局参数后，便开始真正的new DecorView 对象了。 DecorView的构造方法 setWindow方法设置DecorView的mWindow变量，若当前上下文是DecorContext，也更新decorContext的mPhoneWindow值。 在DecorContext.java中,设置mPhoneWindow的值，同时从phoneWindow中获取上下文，取得context的弱引用。 流程图 补充View 提供的获取坐标方法getTop： View 自身的顶边到父View顶边的距离 getLeft： View 自身的左边到父View左边的距离 getRight： View 自身的右边到父View左边的距离 getBottom： View 自身的底边到父View上边的距离 MotionEvent 提供的获取坐标方法getX : 触摸点到当前控件左边缘的距离 getY : 触摸点当前控件顶边缘的距离 getRawX : 触摸点屏幕左边缘的距离 getRawY : 触摸点到屏幕顶边缘的距离 MeasureSpec的三种类型 UNSPECIFIED:父级没有对子级施加任何约束。 EXACTLY:父级已确定子级的确切大小 AT_MOST:子级可以根据需要的大小而定，最大可以达到指定的大小。 onFinishInflate 调用时机setContentView &gt; onFinishInflate &gt; view绘制流程（performMeasure、performLayout、performDraw）]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+      <tags>
+        <tag>DecorView</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>二叉搜索树</title>
+    <url>/article/7cab1e06/</url>
+    <content><![CDATA[[TOC] 二叉搜索树]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>二叉搜索树</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>二叉树基础操作</title>
+    <url>/article/bb06284f/</url>
+    <content><![CDATA[[TOC] 二叉树基础操作]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>二叉树</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>二叉树非递归遍历</title>
+    <url>/article/1062d183/</url>
+    <content><![CDATA[[TOC] 前序遍历_非递归 中序遍历_非递归 后序遍历_非递归]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>二叉树</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>gradle命令</title>
+    <url>/article/dda7bba2/</url>
+    <content><![CDATA[[TOC] gradlew 命令详解gradlew tasks –all：查看所有任务，包括缓存任务等； gradlew clean：清除工程目录下的build文件夹； gradlew build： 检查依赖并编译打包，debug、release环境的包都会打出来； gradlew assemble：编译指定的包：如Debug包（gradlew assembleDebug）、Release包（gradlew assembleRelease）、渠道包（gradlew assembleOemRelease/assembleOemDebug）、定制的版本等等； gradlew install：编译并安装指定的包。如Debug包（gradlew installDebug）、Release包（gradlew installOemRelease/installOemDebug）、定制的版本等等； gradlew uninstall：卸载已安装的指定模式的包：如Debug包（gradlew uninstallDebug）、Release包（gradlew uninstallRelease）、渠道包（gradlew uninstallOemRelease/uninstallOemDebug）、定制的版本等等； gradlew :模块名称:dependencies ，如gradlew :app:dependencies，作用：查看包依赖关系； gradlew build -i/–info -d/–debug -s/–stacktrace：编译并打印debug模式和info等级的日志及所用异常的堆栈信息(–stacktrace)； gradlew clean build –refresh-dependencies：组合指令，清除构建并重新构建，同时强制刷新依赖(gradlew –refresh-dependencies)； gradlew –offline：离线模式，即让Gradle只使用本地cache里的依赖，如果cache中没有也不会更新依赖，而是提示编译失败； gradlew –refresh-dependencies：强制刷新依赖，即检查依赖是否有更新比如动态版本、SHA1进行本地cache和远程仓库散列码的对比等，有更新则下载更新进行构建；使用这种方式可以避免手动删除cache；–info：打印堆栈信息； gradlew –daemon：守护进程，使用Gradle的守护进程构建，能够提高构建效率，如果守护进程没启动或现有的都处于忙碌状态，就启动一个守护进程； 守护进程和守护线程的区别： 守护进程 :只会守护到主进程的代码结束 守护线程 :会守护所有其他非守护线程的结束 gradlew –no-daemon：如果你已经配置为使用守护进程构建，可以使用该选项本次不用守护进程构建； gradlew –continuous：连续构建，即任务队列中即使某个任务失败，不会终止执行，而是会继续执行下一个任务；gradlew –parallel –parallel-threads=N：并行编译； gradlew –configure-on-demand：按需编译； 依赖配置implementation：gradle会将依赖项添加到编译类路径，并将依赖项打包到编译输出。且其他模块只有在运行时才能使用该依赖项。 api：gradle会将依赖项添加到编译类路径和编译输出。当一个模块包含 api 依赖项时，会让 gradle 了解该模块要以传递方式将该依赖项导出到其他模块，以便这些模块在运行时和编译时都可以使用该依赖项。 compileOnly：gradle只会将依赖项添加到编译类路径，不会将其添加到编译输出。 runtimeOnly：gradle只会将依赖项添加到编译输出，以便在运行时使用。即，不会将其添加到编译类路径。 annotationProcessor：要添加对作为注解处理器的库的依赖关系，必须使用 annotationProcessor 配置将其添加到注解处理器类路径。]]></content>
+      <categories>
+        <category>技巧</category>
+      </categories>
+      <tags>
+        <tag>gradle</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>线程池原理</title>
+    <url>/article/335c74d5/</url>
+    <content><![CDATA[[TOC] 线程池原理优点： 能够实现复用 线程统一管理 核心参数 corePoolSize 为线程池的基本大小。 maximumPoolSize 为线程池最大线程大小。 keepAliveTime 和 unit 则是线程空闲后的存活时间。 workQueue 用于存放任务的阻塞队列。 handler 当队列和最大线程池都满了之后的饱和策略。 执行流程提交任务》核心线程是否已满》阻塞队里是否已满》线程池是否已满》拒绝策略 拒绝策略 AbortPolicy： 直接拒绝所提交的任务，并抛出RejectedExecutionException异常。 CallerRunsPolicy：只用调用者所在的线程来执行任务。 DiscardPolicy：不处理直接丢弃掉任务。 DiscardOldestPolicy：丢弃掉阻塞队列中存放时间最久的任务，执行当前任务。 延时任务与定时任务线程池可以处理延时任务，设置延迟时间执行任务 通过execute执行无返回值，而submit提交则有Future的返回值，其中get方法可以设置timeout时间，若deadline到达，还没有get到结果，则抛出异常。通过这个方法可以处理定时任务。但是值得注意的是，该方法会直接阻塞get所在线程！！若是在主线程中直接引起ui卡住，长时间超过5s则ANR。若想不卡主线程，而设置定时任务可以采用timer方式，除了这种方式外还可以采用开启守护线程方式来解决。 应用场景当需要频繁创建线程来执行任务的时候 需要延迟执行任务 多线程&amp;多任务场景以及单线程场景 其他场景例如协程。协程（kotlin）的执行环境也是线程池的应用之一。当在主线程中使用协程提交任务，这些任务会被调度到线程池的各个线程中，虽然不在同一个线程，但是能够保证一定的执行顺序。通过自定义协程调度器可以设置其执行的指定线程池。总的来说，依靠的还是线程池。 例子 输出：]]></content>
+      <categories>
+        <category>并发编程</category>
+      </categories>
+      <tags>
+        <tag>线程池</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>okhttp框架分析</title>
+    <url>/article/cec99305/</url>
+    <content><![CDATA[[TOC] OkHttp基于Socket， 和HttpUrlConnection同级但并不属于HttpUrlConnection（断点续传的关键） 目前相对主流的框架Retrofit，Glide中都是内置了OkHttp 构造函数 获取拦截器链添加各种拦截器，然后建立拦截器链，来处理对请求对象的拦截操作。 拦截器关键类为RealInterceptorChain。 一个具体的拦截器链，包含整个拦截器链：所有应用程序拦截器，OkHttp核心，所有网络拦截器，最后是网络调用者。如果该链用于应用程序拦截器，则connection必须为空。如果它是用于网络拦截器的，则connection必须为非空。 核心部分包括常见异常日志打印；拦截器的链式调用；责任链模式； 异步请求 源码分析 相关异步回调 promoteAndExecute将合格的回调从readyAsyncCalls更新到runningAsyncCalls，并在执行程序服务上运行它们。 不能以同步方式调用，因为执行调用可以调用用户代码。 @return如果调度程序当前正在运行回调，则为true。]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+      <tags>
+        <tag>okhttp</tag>
+      </tags>
+  </entry>
+</search>
