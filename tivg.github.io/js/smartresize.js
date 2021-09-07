@@ -1,1 +1,0 @@
-"use strict";!function(t,i){jQuery.fn[i]=function(t){return t?this.bind("resize",(e=t,function(){var t=this,i=arguments;r&&clearTimeout(r),r=setTimeout(function(){e.apply(t,i),r=null},100)})):this.trigger(i);var e,r}}(jQuery,"smartresize");

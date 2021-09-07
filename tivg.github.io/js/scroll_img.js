@@ -1,1 +1,0 @@
-"use strict";$(window).scroll(function(){400<$(window).scrollTop()?$(".back-to-top").css("top",parseInt(.832*window.innerHeight)-900):$(".back-to-top").css("top","-999px")}),$(".back-to-top").click(function(){$("body,html").animate({scrollTop:0},600)});
