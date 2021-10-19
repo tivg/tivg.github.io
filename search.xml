@@ -1369,4 +1369,408 @@ lock.lock()：即使调用了线程的interrupt()方法,也没有真正的中断
         <tag>okhttp</tag>
       </tags>
   </entry>
+  <entry>
+    <title>碎片</title>
+    <url>/article/88d274c3/</url>
+    <content><![CDATA[<p>[TOC]</p>
+<h2 id="FloatingActionButton"><a href="#FloatingActionButton" class="headerlink" title="FloatingActionButton"></a>FloatingActionButton</h2><p>错误日志：</p>
+<p>Could not inflate Behavior subclass FloatingActionButton</p>
+<p>解决方案：FloatingActionButton的layout_behavior使用完整路径，不要使用相对路径；</p>
+<h2 id="延迟"><a href="#延迟" class="headerlink" title="延迟"></a>延迟</h2><p>setPriority在Thread.start()之前</p>
+<h2 id="merge失败"><a href="#merge失败" class="headerlink" title="merge失败"></a>merge失败</h2><p>如下所示，重复写了，导致merge资源失败，并没有报出具体错误位置</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="所有命令失效"><a href="#所有命令失效" class="headerlink" title="所有命令失效"></a>所有命令失效</h2><p>export PATH=”/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin”</p>
+]]></content>
+      <categories>
+        <category>技巧</category>
+      </categories>
+      <tags>
+        <tag>bat命令</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>gradle执行流程</title>
+    <url>/article/8e10e406/</url>
+    <content><![CDATA[<p>[TOC]</p>
+<h2 id="gradle执行流程"><a href="#gradle执行流程" class="headerlink" title="gradle执行流程"></a>gradle执行流程</h2><p>Gradle.buildStarted()</p>
+<p>初始化阶段</p>
+<ul>
+<li>setting.gradle</li>
+<li>Gradle.settingsEvaluated()</li>
+<li>Gradle.projectsLoaded()</li>
+</ul>
+<p>配置阶段</p>
+<ul>
+<li>Gradle.beforeProject()&amp;Project.beforeEvaluate()</li>
+<li>build.gradle(确定任务子集和配置task)</li>
+<li>Gradle.afterProject()&amp;Project.afterEvaluate()</li>
+<li>Gradle.projectsEvaluated()&amp;Gradle.taskGraph.whenReady()</li>
+</ul>
+<p>执行阶段</p>
+<ul>
+<li>Gradle.taskGraph.beaforeTask()</li>
+<li>执行Task中的Actions</li>
+<li>Gradle.taskGraph.afterTask()</li>
+</ul>
+<p>Gradle.buildFinish()</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+      <tags>
+        <tag>gradle</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>groovy 学习</title>
+    <url>/article/435ae83e/</url>
+    <content><![CDATA[<p>[TOC]</p>
+<h2 id="属性访问"><a href="#属性访问" class="headerlink" title="属性访问"></a>属性访问</h2><p>使用‘.@’直接访问变量，跳过默认的getter/setter方法调用。</p>
+<h2 id="范围"><a href="#范围" class="headerlink" title="范围"></a>范围</h2><p>1..5  包含范围</p>
+<p>5..1  降序排列</p>
+<p>1..&lt;5  独占范围 (开区间)</p>
+<p>‘a’..’z’  范围也可以由字符组成</p>
+<h2 id="方法定义"><a href="#方法定义" class="headerlink" title="方法定义"></a>方法定义</h2><p>使用 def 关键字定义一个方法，方法不需要指定返回值类型，参数类型，方法体内的最后一行会自动作为返回值，而不需要return关键字</p>
+<p>定义方法时，如果参数没有返回值类型，可以省略 def，使用 void 即可</p>
+<p>实际上不管有没有返回值，Groovy 中返回的都是 Object 类型</p>
+<p>类的构造方法，避免添加 def 关键字</p>
+<h2 id="基本数据类型"><a href="#基本数据类型" class="headerlink" title="基本数据类型"></a>基本数据类型</h2><p><strong>Groovy中没有基本数据类型，全是引用类型，即使定义了基础类型，也会被转换成对应的包装类</strong></p>
+<ul>
+<li><p>在 Groovy 中，== 就相当于 Java 的 equals</p>
+</li>
+<li><p>比较两个对象是否是同一个，使用 .is()</p>
+</li>
+<li><p>**表示次方运算符</p>
+</li>
+</ul>
+<h2 id="强大的Switch"><a href="#强大的Switch" class="headerlink" title="强大的Switch"></a>强大的Switch</h2><figure class="highlight gradle"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> result = <span class="string">'xxxx'</span></span><br><span class="line"><span class="keyword">switch</span> (result)&#123;</span><br><span class="line">    <span class="keyword">case</span> [<span class="number">1</span>,<span class="number">2</span>,<span class="string">'yyy'</span>]:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h2><p>闭包可以通过 .call 方法来调用</p>
+<p>每个闭包中都含有 <strong>this、owner 和 delegate</strong> 这三个内置对象</p>
+<ul>
+<li>this 永远指向定义该闭包最近的类对象，就近原则</li>
+<li>owner 、delegate 指向定义该闭包的类对象或者闭包对象</li>
+<li>三者区别：this 和 owner 默认是只读的，delegate 可写的。</li>
+</ul>
+<h2 id="trait关键字"><a href="#trait关键字" class="headerlink" title="trait关键字"></a>trait关键字</h2><p>trait这个是Groovy中新加的类型，但是其实他就是一种介于抽象类和接口之间的类型；trait中可以定义抽象方法(即不实现)，也可以定义正常方法；使用的时候，和接口一样，也是要implement的,非抽象类实现是需要实现其抽象方法。</p>
+<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">trait</span> <span class="title">MyTrait</span>&#123;</span></span><br><span class="line">      <span class="keyword">abstract</span> <span class="keyword">void</span> test();</span><br><span class="line">      <span class="keyword">void</span> play()&#123;</span><br><span class="line">         prinlt(<span class="string">"play"</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;  </span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">TestClass</span> <span class="title">implement</span> <span class="title">MyTrait</span>&#123;</span></span><br><span class="line">       <span class="meta">@Override</span> </span><br><span class="line">       <span class="keyword">void</span> test()&#123;</span><br><span class="line">       &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+      <tags>
+        <tag>groovy</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>对象深度拷贝</title>
+    <url>/article/dcc2a71f/</url>
+    <content><![CDATA[<p>[TOC]</p>
+<p>深度拷贝对象的方式有很多，有基于构造函数的，也有借助第三方库的，这里介绍两种常见的方式</p>
+<h2 id="方式一"><a href="#方式一" class="headerlink" title="方式一"></a>方式一</h2><p>基于Cloneable接口</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">K</span> <span class="keyword">implements</span> <span class="title">Cloneable</span>, <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getNa</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> na;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setNa</span><span class="params">(String na)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.na = na;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    String na;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">K</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> K <span class="title">clone</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        K k = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            k = (K) <span class="keyword">super</span>.clone();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (CloneNotSupportedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> k;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">F</span> <span class="keyword">implements</span> <span class="title">Cloneable</span>, <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">    String name;</span><br><span class="line">    K k = <span class="keyword">new</span> K();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">F</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> F <span class="title">clone</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        F f = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            f = (F) <span class="keyword">super</span>.clone();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (CloneNotSupportedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        f = <span class="keyword">new</span> F();</span><br><span class="line">        f.k = f.k.clone();</span><br><span class="line">        <span class="keyword">return</span> f;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="方式二"><a href="#方式二" class="headerlink" title="方式二"></a>方式二</h2><p>采用字节流的方式</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> F <span class="title">copy</span><span class="params">(F f)</span> </span>&#123;</span><br><span class="line">        ByteArrayOutputStream bao = <span class="keyword">new</span> ByteArrayOutputStream();</span><br><span class="line">        ObjectOutputStream oos;</span><br><span class="line">        Object obj = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            oos = <span class="keyword">new</span> ObjectOutputStream(bao);</span><br><span class="line">            oos.writeObject(f);</span><br><span class="line">            oos.close();</span><br><span class="line">            ByteArrayInputStream bis = <span class="keyword">new</span> ByteArrayInputStream(bao.toByteArray());</span><br><span class="line">            ObjectInputStream ois = <span class="keyword">new</span> ObjectInputStream(bis);</span><br><span class="line">            obj = ois.readObject();</span><br><span class="line">            ois.close();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> (F) obj;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>对象拷贝</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>arr打包</title>
+    <url>/article/4e400033/</url>
+    <content><![CDATA[<p>[TOC]</p>
+<h2 id="jar与aar区别"><a href="#jar与aar区别" class="headerlink" title="jar与aar区别"></a>jar与aar区别</h2><ul>
+<li>*.jar：只包含了class文件与清单文件 ，不包含资源文件，如图片等所有res中的文件。</li>
+<li>*.aar：包含所有资源 ，class 以及 res 资源文件全部包含</li>
+</ul>
+<h2 id="打包AAR"><a href="#打包AAR" class="headerlink" title="打包AAR"></a>打包AAR</h2><p>对于成型的项目(有依赖)，我们可以直接在项目中New一个Moudle 然后把项目复制到Moudle中，或者重新复制出来一个当前项目，然后在复制的项目中直接把此项目修改成AAR。</p>
+<p>把apply plugin: ‘com.android.application’修改成apply plugin: ‘com.android.library’</p>
+<p>去掉defaultConfig下的applicationId</p>
+<p>修改application</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">application</span></span></span><br><span class="line"><span class="tag">   <span class="attr">android:allowBackup</span>=<span class="string">“false”</span></span></span><br><span class="line"><span class="tag">   <span class="attr">android:supportsRtl</span>=<span class="string">“true”</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>注释掉启动的Activity启动的action</p>
+<p>AAR中是没有Application的,我们可以单独写一个Options类，提供给调用者，让他传递过来application，这样我们就可以在这个类中做一些初始化操作了。</p>
+<p>直接build–&gt;Make Moudle app 就可以生成aar了！</p>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><p><strong>1.</strong> 主项目需要依赖AAR中所依赖的远程库，否则会出现ClassNotFound异常</p>
+<p><strong>2.</strong> 资源命名最好统统加上你的项目名字前缀，比如图片资源、string、color、dimens、layout等等，反正res目录下所有文件最好都使用统一的加前缀命名，防止跟宿主app下的资源重复，因为aar引用跟源码引用起到的效果一样一样的，所有很容易出现资源重复引用的问题，所以加上前缀非常有必要。</p>
+<p><strong>3.</strong> 如果在aar的MyAppliction里面使用了类的管理器，那么在打包成aar的时候需要将代码抽出来做个独立的类管理器，记住一点，打包成aar之后所有和application有关的东西都要检查替换，避免出现空指针异常。<br><strong>4.</strong> AAR模块用butterknife需要把资源R改为R2(批量替换)</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+      <tags>
+        <tag>arr打包</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>插件kotlin化</title>
+    <url>/article/32d3c5f7/</url>
+    <content><![CDATA[<p>[TOC]</p>
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>新版本的官方Gradle插件，都已经全部使用Kotlin来编写。用法比较简洁，如下所示</p>
+<p>文件改变：</p>
+<p>buld.gradle.kts</p>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line">plugins &#123;</span><br><span class="line">    `java-gradle-plugin`</span><br><span class="line">    id(<span class="string">"org.jetbrains.kotlin.jvm"</span>) version <span class="string">"1.3.72"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">repositories &#123;</span><br><span class="line">    mavenCentral()</span><br><span class="line">    google()</span><br><span class="line">    jcenter()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">dependencies &#123;</span><br><span class="line">    implementation(platform(<span class="string">"org.jetbrains.kotlin:kotlin-bom"</span>))</span><br><span class="line">    implementation(<span class="string">"com.android.tools.build:gradle:4.1.1"</span>)</span><br><span class="line">    implementation(<span class="string">"org.ow2.asm:asm:9.1"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">gradlePlugin &#123;</span><br><span class="line">    <span class="keyword">val</span> greeting <span class="keyword">by</span> plugins.creating &#123;</span><br><span class="line">        id = <span class="string">"asmtest"</span></span><br><span class="line">        implementationClass = <span class="string">"com.yw.asm.MyPlugin"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">java.sourceCompatibility = JavaVersion.VERSION_1_8</span><br><span class="line">java.targetCompatibility = JavaVersion.VERSION_1_8</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>tips：通过gradle init命令可以生成Kotlin版本的插件默认代码</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+      <tags>
+        <tag>插件kotlin化</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>代码混淆配置</title>
+    <url>/article/8d839750/</url>
+    <content><![CDATA[<p>[TOC]</p>
+<h2 id="代码混淆"><a href="#代码混淆" class="headerlink" title="代码混淆"></a>代码混淆</h2><p>主要功能：优化代码，防止反编译</p>
+<p>打开方式： minifyEnabled</p>
+<p>proguard-android.txt是Android提供的默认混淆配置文件</p>
+<p><strong>混淆命令</strong></p>
+<ul>
+<li>keep：保留类和类中的成员，防止被混淆或移除</li>
+<li>keepnames：保留类和类中的成员，防止被混淆，成员没有被引用会被移除</li>
+<li>keepclassmembers：只保留类中的成员，防止被混淆或移除</li>
+<li>keepclassmembernames：只保留类中的成员，防止被混淆，成员没有引用会被移除</li>
+<li>keepclasseswithmembers：保留类和类中的成员，防止被混淆或移除，保留指明的成员</li>
+<li>keepclasseswithmembernames：保留类和类中的成员，防止被混淆，保留指明的成员，成员没有引用会被移除</li>
+</ul>
+<p><strong>混淆通配符</strong></p>
+<ul>
+<li><code>&lt;field&gt;</code>：匹配类中的所有字段</li>
+<li><code>&lt;method&gt;</code>：匹配类中所有的方法</li>
+<li><code>&lt;init&gt;</code>：匹配类中所有的构造函数</li>
+<li><code>*</code>： 匹配任意长度字符，不包含包名分隔符(.)</li>
+<li><code>**</code>： 匹配任意长度字符，包含包名分隔符(.)</li>
+<li><code>***</code>： 匹配任意参数类型</li>
+</ul>
+<p>keep的规则的格式如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[keep命令] [类] &#123;</span><br><span class="line">        [成员]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">android&#123;</span><br><span class="line">    buildTypes &#123;</span><br><span class="line">        release &#123;</span><br><span class="line">            buildConfigField <span class="string">"boolean"</span>, <span class="string">"LOG_DEBUG"</span>, <span class="string">"false"</span> <span class="comment">//不显示log</span></span><br><span class="line">            minifyEnabled <span class="literal">true</span></span><br><span class="line">            shrinkResources <span class="literal">true</span></span><br><span class="line">            proguardFiles getDefaultProguardFile(<span class="string">'proguard-android.txt'</span>), <span class="string">'proguard-rules.pro'</span></span><br><span class="line">            signingConfig signingConfigs.config</span><br><span class="line">            &#125;</span><br><span class="line">       &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="aar插件配置方式"><a href="#aar插件配置方式" class="headerlink" title="aar插件配置方式"></a>aar插件配置方式</h2><figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    ···</span><br><span class="line">    defaultConfig &#123;</span><br><span class="line">        ···</span><br><span class="line">        consumerProguardFile <span class="string">'proguard-rules.pro'</span></span><br><span class="line">    &#125;</span><br><span class="line">    ···</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+      <tags>
+        <tag>代码混淆</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>字节码插桩</title>
+    <url>/article/cad98d1c/</url>
+    <content><![CDATA[<p>[TOC]</p>
+<h2 id="ASM简介"><a href="#ASM简介" class="headerlink" title="ASM简介"></a>ASM简介</h2><p>ASM提供了两种API来生成和转换已编译类:</p>
+<ul>
+<li>核心API，以基于事件形式来表示类；</li>
+<li>树API，以基于对象形式来表示类;</li>
+</ul>
+<p>应用场景：ButterKnife，Dagger、无痕埋点，性能监控等</p>
+<h2 id="两者对比"><a href="#两者对比" class="headerlink" title="两者对比"></a>两者对比</h2><p>基于事件的API把类看作是一系列事件来表示，每一个类的事件表示一个类的元素。类似解析XML的SAX。</p>
+<p>基于对象的API将类表示成一棵对象树，每个对象表示类的一部分。类似解析XML的DOM</p>
+<ul>
+<li>事件API内存占用少于对象API，因为事件API不需要在内存中创建和存储对象树</li>
+<li>事件API实现难度比对象API大，因为事件API在任意时刻类中只有一个元素可使用，但是对象API能获得整个类。</li>
+</ul>
+<h2 id="字节代码指令"><a href="#字节代码指令" class="headerlink" title="字节代码指令"></a>字节代码指令</h2><p>字节代码指令由一个标识该指令的操作码和固定数目的参数组成:</p>
+<ul>
+<li>操作码是一个无符号字节值——即字节代码名，由助记符号标识</li>
+<li>参数是静态值，确定了精确的指令行为，在操作码之后给出</li>
+</ul>
+<p><strong>ILOAD</strong>, <strong>LLOAD</strong>, <strong>FLOAD</strong>, <strong>DLOAD</strong> 和 <strong>ALOAD</strong> 指令读取一个局部变量，并将它的值压到操作数栈中。</p>
+<p>它们的参数是必须读取的局部变量的索引 <em>i</em>。</p>
+<p><strong>ILOAD</strong> 用于加载一个 <strong>boolean</strong>、<strong>byte</strong>、 <strong>char</strong>、<strong>short</strong> 或 <strong>int</strong> 局部变量。</p>
+<p><strong>LLOAD</strong>、<strong>FLOAD</strong> 和 <strong>DLOAD</strong> 分别用于加载 <strong>long</strong>、<strong>float</strong> 或 <strong>double</strong> 值。(<strong>LLOAD</strong> 和 <strong>DLOAD</strong> 实际加载两个槽 <em>i</em> 和 <em>i</em>+1)。</p>
+<p>最后，<strong>ALOAD</strong> 用于加载任意非基元值，即对 象和数组引用。</p>
+<p>与之对应，<strong>ISTORE</strong>、<strong>LSTORE</strong>、<strong>FSTORE</strong>、<strong>DSTORE</strong> 和 <strong>ASTORE</strong> 指令从操作数栈 中弹出一个值，并将它存储在由其索引 i 指定的局部变量中。</p>
+<p><strong>POP</strong>弹出栈顶部的值</p>
+<p><strong>DUP</strong>压入顶部栈值的一个副本</p>
+<p><strong>SWAP</strong>弹出两个值，并按逆序压入它们</p>
+<p><strong>ACONST</strong>_<strong>NULL</strong>压入<strong>null</strong> </p>
+<p><strong>ICONST</strong><em><strong>0</strong>压入 <strong>int</strong> 值 0</em></p>
+<p><strong>FCONST</strong>_<strong>0</strong> 压入 <strong>0f</strong></p>
+<p><strong>DCONST_0</strong> 压入 <strong>0d</strong></p>
+<p><strong>BIPUSH</strong> <em>b</em> 压入字节值 <em>b</em></p>
+<p><strong>SIPUSH</strong> <em>s</em> 压入 <strong>short</strong> 值 <em>s</em></p>
+<p><strong>LDC</strong> <em>cst</em> 压入任意 <strong>int</strong>、<strong>float</strong>、<strong>long</strong>、<strong>double</strong>、<strong>String</strong> 或 <strong>class *<em>常量 *</em>cst</strong> </p>
+<p><strong>xADD</strong>、<strong>xSUB</strong>、<strong>xMUL</strong>、<strong>xDIV</strong> 和 <strong>xREM</strong> 对应于<strong>+</strong>、<strong>-</strong>、<strong>***、</strong>/<strong>和</strong>%<strong>运算，其中 **x</strong> 为 <strong>I</strong>、 <strong>L</strong>、<strong>F</strong> 或 <strong>D</strong> 之一</p>
+<p>类似地，还有其他对应于<strong>&lt;&lt;</strong>、<strong>&gt;&gt;</strong>、<strong>&gt;&gt;&gt;</strong>、<strong>|</strong>、<strong>&amp;</strong>和<strong>^</strong>运算的指令，用于处理<strong>int</strong>和<strong>long</strong>值。</p>
+<p><strong>I2F</strong>, <strong>F2D</strong>, <strong>L2D</strong> 等将数值由一种数值类型转换为另一种 类型。</p>
+<p><strong>CHECKCAST</strong> <em>t</em> 将一个引用值转换为类型 <em>t</em>。</p>
+<p><strong>NEW</strong> <em>type*指令将 一个 *type</em> 类型的新对象压入栈中</p>
+<p><strong>GETFIELD</strong> <em>owner name desc</em> 弹出一个对象引用，并压入其 <em>name</em> 字段中的值。</p>
+<p><strong>PUTFIELD</strong> <em>owner name desc</em> 弹出一个值和一个对象引用，并将这个值存储在它的 <em>name</em> 字段中</p>
+<p><strong>INVOKEVIRTUAL</strong> <em>owner name desc</em> 调用在 类 <em>owner</em> 中定义的 <em>name</em> 方法，其方法描述符为 <em>desc</em></p>
+<p><strong>INVOKESTATIC</strong> 用于静态方法</p>
+<p><strong>INVOKESPECIAL</strong> 用于私有方法和构造器</p>
+<p><strong>INVOKEINTERFACE</strong> 用于接口中定义的方法</p>
+<p><strong>INVOKEDYNAMIC</strong>  用于新动态方法调用机制（对于 Java 7 中的类）</p>
+<p><strong>x</strong> <strong>ALOAD</strong>指令弹出一个索引和一个数组，并压入此索引处数组元素的值。</p>
+<p><strong>x</strong> <strong>ASTORE</strong> 指令弹出一个值、一个索引和一个数组，并将这个值存储在该数组的这一索引处</p>
+<p><strong>x</strong> 可以是 <strong>I</strong>、<strong>L</strong>、<strong>F</strong>、<strong>D</strong> 或 <strong>A</strong>，还可以是 <strong>B</strong>、<strong>C</strong> 或 <strong>S</strong>。</p>
+<p><strong>IFEQ</strong> <em>label</em> 从栈中弹出一个 <strong>int</strong> 值，如果这个值为 0，则跳转到由这个 <em>label</em> 指定的指令处</p>
+<p><strong>IFNE</strong> 或 <strong>IFGE</strong></p>
+<p><strong>TABLESWITCH</strong> 和<strong>LOOKUPSWITCH</strong> 对应于 <strong>switch</strong> Java 指令。</p>
+<p><strong>x</strong> <strong>RETURN</strong>和<strong>RETURN</strong>指令用于终止一个方法的执行，并将其结果返回给调用者</p>
+<p><strong>RETURN</strong> 用于返回 <strong>void</strong> 的方法，<strong>x ** **RETURN</strong> 用于其他方法。</p>
+<h2 id="例子1"><a href="#例子1" class="headerlink" title="例子1"></a>例子1</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> pkg;</span><br><span class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Bean</span> </span>&#123;</span><br><span class="line">      <span class="keyword">private</span> <span class="keyword">int</span> f;</span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getF</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">this</span>.f;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setF</span><span class="params">(<span class="keyword">int</span> f)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">this</span>.f = f;</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>getter</strong> 方法的字节码</p>
+<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="attr">ALOAD</span> <span class="string">0</span></span><br><span class="line"><span class="attr">GETFIELD</span> <span class="string">pkg/Bean f I</span></span><br><span class="line"><span class="attr">IRETURN</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>setter</strong> 方法的字节码</p>
+<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="attr">ALOAD</span> <span class="string">0</span></span><br><span class="line"><span class="attr">ILOAD</span> <span class="string">1</span></span><br><span class="line"><span class="attr">PUTFIELD</span> <span class="string">pkg/Bean f I</span></span><br><span class="line"><span class="attr">RETURN</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="例子2"><a href="#例子2" class="headerlink" title="例子2"></a>例子2</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">checkAndSetF</span><span class="params">(<span class="keyword">int</span> f)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (f &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">       <span class="keyword">this</span>.f = f;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">       <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException();</span><br><span class="line">      &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>字节码：</p>
+<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">ILOAD <span class="number">1</span></span><br><span class="line">IFLT label</span><br><span class="line">ALOAD <span class="number">0</span></span><br><span class="line">ILOAD <span class="number">1</span></span><br><span class="line">PUTFIELD pkg/Bean f I GOTO end</span><br><span class="line"><span class="string">label:</span></span><br><span class="line">      NEW java<span class="regexp">/lang/</span>IllegalArgumentException</span><br><span class="line">      DUP</span><br><span class="line">      INVOKESPECIAL java<span class="regexp">/lang/</span>IllegalArgumentException &lt;init&gt; ()V</span><br><span class="line">      ATHROW</span><br><span class="line"><span class="string">end:</span></span><br><span class="line">RETURN</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="例子3"><a href="#例子3" class="headerlink" title="例子3"></a>例子3</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sleep</span><span class="params">(<span class="keyword">long</span> d)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">       Thread.sleep(d);</span><br><span class="line">      &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">       e.printStackTrace();</span><br><span class="line">      &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>字节码：</p>
+<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">TRYCATCHBLOCK <span class="keyword">try</span> <span class="keyword">catch</span> <span class="keyword">catch</span> java<span class="regexp">/lang/</span>InterruptedException <span class="string">try:</span></span><br><span class="line">      LLOAD <span class="number">0</span></span><br><span class="line">      INVOKESTATIC java<span class="regexp">/lang/</span>Thread sleep (J)V</span><br><span class="line">      RETURN</span><br><span class="line"><span class="string">catch:</span></span><br><span class="line">      INVOKEVIRTUAL java<span class="regexp">/lang/</span>InterruptedException printStackTrace ()V</span><br><span class="line">      RETURN</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="常用api"><a href="#常用api" class="headerlink" title="常用api"></a>常用api</h2><p>visitFieldInsn ： 访问某个成员变量的指令，支持GETSTATIC, PUTSTATIC, GETFIELD or PUTFIELD.</p>
+<p>visitFrame ：访问当前局部变量表和操作数栈中元素的状态，参数就是局部变量表和操作数栈的内容</p>
+<p>visitIincInsn ： 访问自增指令</p>
+<p>visitVarInsn ：访问局部变量指令，就是取局部变量变的值放入操作数栈</p>
+<p>visitMethodInsn ：访问方法指令，就是调用某个方法，支持INVOKEVIRTUAL, INVOKESPECIAL, INVOKESTATIC or INVOKEINTERFACE.</p>
+<p>visitInsn ： 访问无操作数的指令，例如nop，duo等等</p>
+<p>visitTypeInsn：访问type指令，即将一个类的全限定名作为参数然后new一个对象压入操作数栈中</p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>自定义插件（官网）： <a href="https://docs.gradle.org/current/userguide/custom_plugins.html" target="_blank" rel="noopener">https://docs.gradle.org/current/userguide/custom_plugins.html</a></p>
+<p>asm文档（官网）：<a href="https://www.javadoc.io/doc/org.ow2.asm/asm/4.0/org/objectweb/asm/MethodVisitor.html" target="_blank" rel="noopener">https://www.javadoc.io/doc/org.ow2.asm/asm/4.0/org/objectweb/asm/MethodVisitor.html</a></p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+      <tags>
+        <tag>ASM插桩</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>自定义插件</title>
+    <url>/article/a2759747/</url>
+    <content><![CDATA[<p>[TOC]</p>
+<h1 id="自定义Gradle-插件"><a href="#自定义Gradle-插件" class="headerlink" title="自定义Gradle-插件"></a>自定义Gradle-插件</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>在gradle中，插件大概可以分为三种类型，第一种是.gradle文件的插件，通过apply from的方式进行引用；第二种是插件对象，通过apply plugin的方式进行引用；第三种是单独项目的插件。</p>
+<p>.gradle 形式的用得并不多，相对比较简单。这里主要介绍对象型插件的自定义方式。</p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">apply <span class="string">plugin:</span> <span class="string">'java-library'</span></span><br><span class="line">apply <span class="string">plugin:</span> <span class="string">'java'</span></span><br><span class="line">apply <span class="string">plugin:</span> <span class="string">'maven'</span></span><br><span class="line">apply <span class="string">plugin:</span> <span class="string">'groovy'</span></span><br><span class="line">apply <span class="string">plugin:</span> <span class="string">'java-gradle-plugin'</span></span><br><span class="line"></span><br><span class="line">repositories &#123;</span><br><span class="line">    google()</span><br><span class="line">    mavenCentral()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">dependencies &#123;</span><br><span class="line"></span><br><span class="line">    implementation <span class="string">"com.android.tools.build:gradle:4.2.1"</span></span><br><span class="line">    implementation gradleApi()</span><br><span class="line">    implementation localGroovy()</span><br><span class="line"></span><br><span class="line">    implementation <span class="string">'org.ow2.asm:asm:9.2'</span></span><br><span class="line">    implementation <span class="string">'org.ow2.asm:asm-util:9.2'</span></span><br><span class="line">    implementation <span class="string">'org.ow2.asm:asm-commons:9.2'</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">gradlePlugin &#123;</span><br><span class="line">    plugins &#123;</span><br><span class="line">        greeting &#123;</span><br><span class="line">            id = <span class="string">'com.xs.track_asm'</span></span><br><span class="line">            implementationClass = <span class="string">'com.xs.track_asm.TrackPlugin'</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">group = <span class="string">'com.xs.track_asm'</span></span><br><span class="line">version = <span class="string">'1.0.0'</span></span><br><span class="line"></span><br><span class="line">uploadArchives &#123;</span><br><span class="line">    repositories.mavenDeployer &#123;</span><br><span class="line">        pom.groupId = <span class="string">'com.xs.track_asm'</span></span><br><span class="line">        pom.artifactId = <span class="string">'track_asm'</span></span><br><span class="line">        pom.version = <span class="string">'1.0.0'</span></span><br><span class="line">        repository(<span class="string">url:</span> uri(<span class="string">'../repos'</span>))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">java &#123;</span><br><span class="line">    sourceCompatibility = JavaVersion.VERSION_1_8</span><br><span class="line">    targetCompatibility = JavaVersion.VERSION_1_8</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">sourceSets &#123;</span><br><span class="line">    main &#123;</span><br><span class="line">        groovy &#123;</span><br><span class="line">            srcDir <span class="string">'src/main/groovy'</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        resources &#123;</span><br><span class="line">            srcDir <span class="string">'src/main/resources'</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h1><p>从gradle-7.0开始，apply plugin: ‘maven’  被移除掉了，因此uploadArchives 等方法将无法使用。需要用maven-publish 进行替换。</p>
+<h2 id="gradle7-0之前"><a href="#gradle7-0之前" class="headerlink" title="gradle7.0之前"></a>gradle7.0之前</h2><p>导入maven</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">apply plugin: <span class="string">'maven'</span></span><br></pre></td></tr></table></figure>
+
+<p>发布配置</p>
+<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">uploadArchives &#123;</span><br><span class="line">    repositories.mavenDeployer &#123;</span><br><span class="line">        pom.groupId = <span class="string">'com.xs.track_asm'</span></span><br><span class="line">        pom.artifactId = <span class="string">'track_asm'</span></span><br><span class="line">        pom.version = <span class="string">'1.0.0'</span></span><br><span class="line">        repository(<span class="string">url:</span> uri(<span class="string">'../repos'</span>))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>发布命令：</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">./gradlew uploadArchives</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="gradle7-0之后"><a href="#gradle7-0之后" class="headerlink" title="gradle7.0之后"></a>gradle7.0之后</h2><p>导入maven</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">apply plugin: <span class="string">'maven-publish'</span></span><br></pre></td></tr></table></figure>
+
+<p>发布配置</p>
+<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">publishing &#123;</span><br><span class="line">    publications &#123;</span><br><span class="line">        mavenJava(MavenPublication) &#123;</span><br><span class="line">            groupId <span class="string">'com.xs.track_asm'</span></span><br><span class="line">            artifactId <span class="string">'track_asm'</span></span><br><span class="line">            version <span class="string">'1.0.0'</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    repositories &#123;</span><br><span class="line">        maven &#123; url uri(<span class="string">'../repos'</span>) &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>发布命令：</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">./gradlew publish</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="权限拒绝"><a href="#权限拒绝" class="headerlink" title="权限拒绝"></a>权限拒绝</h3><figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line"><span class="string">zsh:</span> permission <span class="string">denied:</span> ./gradlew</span><br></pre></td></tr></table></figure>
+
+<p>执行： </p>
+<figure class="highlight gml"><table><tr><td class="code"><pre><span class="line">chmod +<span class="symbol">x</span> gradlew</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="打包文档"><a href="#打包文档" class="headerlink" title="打包文档"></a>打包文档</h2><figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">javadoc &#123;</span><br><span class="line">    options &#123;</span><br><span class="line">        <span class="comment">//防止注释出现乱码</span></span><br><span class="line">        encoding <span class="string">"UTF-8"</span></span><br><span class="line">        charSet <span class="string">'UTF-8'</span></span><br><span class="line">        author <span class="literal">true</span></span><br><span class="line">        version <span class="literal">true</span></span><br><span class="line">        links <span class="string">"http://docs.oracle.com/javase/7/docs/api"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="buildSrc"><a href="#buildSrc" class="headerlink" title="buildSrc"></a>buildSrc</h2><p>优点：在buildSrc中定义的插件，可以直接在其他module中运用</p>
+<p>即直接apply具体的类，而不是其发布名称，不管做什么修改，都能马上体现，而不需要等到重新发布版本。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+      <tags>
+        <tag>自定义插件</tag>
+      </tags>
+  </entry>
 </search>
