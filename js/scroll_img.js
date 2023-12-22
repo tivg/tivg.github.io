@@ -1,15 +1,1 @@
-$(window).scroll(function() {
-    var scroHei = $(window).scrollTop();
-    if (scroHei > 400) { 
-        $('.back-to-top').css('top',parseInt(window.innerHeight*0.832)-900);
-    } else { 
-       $('.back-to-top').css('top','-999px');
-    }
-});
-
-$('.back-to-top').click(function() {
-        $('body,html').animate({
-            scrollTop: 0
-         }, 600);
-      })
-
+"use strict";$(window).scroll(function(){400<$(window).scrollTop()?$(".back-to-top").css("top",parseInt(.832*window.innerHeight)-900):$(".back-to-top").css("top","-999px")}),$(".back-to-top").click(function(){$("body,html").animate({scrollTop:0},600)});
