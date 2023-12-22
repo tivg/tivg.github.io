@@ -24,13 +24,13 @@ border-left-color: #1abc9c;
 <li>让单个线程等待，合并多个线程结果；</li>
 </ul>
 <p>例子1：</p>
-<p><img src="/image-20210212152635201.png" alt="image-20210212152635201"></p>
+<p><img src="/article/22df6896/image-20210212152635201.png" alt="image-20210212152635201"></p>
 <p>输出</p>
-<p><img src="/image-20210212152709098.png" alt="image-20210212152709098"></p>
+<p><img src="/article/22df6896/image-20210212152709098.png" alt="image-20210212152709098"></p>
 <p>例子2:</p>
-<p><img src="/image-20210212153137792.png" alt="image-20210212153137792"></p>
+<p><img src="/article/22df6896/image-20210212153137792.png" alt="image-20210212153137792"></p>
 <p>输出：</p>
-<p><img src="/image-20210212153211891.png" alt="image-20210212153211891"></p>
+<p><img src="/article/22df6896/image-20210212153211891.png" alt="image-20210212153211891"></p>
 <h3 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h3><p>从countDown的源码中我们可以看到，CountDownLatch内部使用了共享模式；</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs JAVA"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">countDown</span><span class="hljs-params">()</span> &#123;<br>    sync.releaseShared(<span class="hljs-number">1</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
 
@@ -43,9 +43,9 @@ border-left-color: #1abc9c;
 <p>CountDownLatch有个注意事项，当计数器减到0后，便不可以再次使用，需要再次new一个CountDownLatch实例对象。若要强制使用，则需要修改源码，将state值进行重置。此外，有另一个类也实现了CountDownLatch类似的功能，并且是可以重用，那就是CyclicBarrier。</p>
 <h2 id="CyclicBarrier"><a href="#CyclicBarrier" class="headerlink" title="CyclicBarrier"></a>CyclicBarrier</h2><p>利用CyclicBarrier类可以实现一组线程相互等待，当所有线程都到达某个屏障点后再进行后续的操作。</p>
 <p>例子：</p>
-<p><img src="/image-20210212160846010.png" alt="image-20210212160846010"></p>
+<p><img src="/article/22df6896/image-20210212160846010.png" alt="image-20210212160846010"></p>
 <p>输出：</p>
-<p><img src="/image-20210212160910543.png" alt="image-20210212160910543"></p>
+<p><img src="/article/22df6896/image-20210212160910543.png" alt="image-20210212160910543"></p>
 <p>通过例子，可以看出，CyclicBarrier的效果是和CountDownLatch一致的。</p>
 <h3 id="源码分析-1"><a href="#源码分析-1" class="headerlink" title="源码分析"></a>源码分析</h3><figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">await</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> InterruptedException, BrokenBarrierException &#123;<br>    <span class="hljs-keyword">try</span> &#123;<br>        <span class="hljs-keyword">return</span> dowait(<span class="hljs-literal">false</span>, <span class="hljs-number">0L</span>);<br>    &#125; <span class="hljs-keyword">catch</span> (TimeoutException toe) &#123;<br>        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(toe); <span class="hljs-comment">// cannot happen</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
@@ -69,7 +69,7 @@ border-left-color: #1abc9c;
 <p>可以用来做对公共资源的流量限制，如数据库连接。</p>
 <p>释放公共资源许可的时候，有两种方法，一个是release，直接释放；另一个是reducePermits，释放并减少总的许可数量。</p>
 <p>例子：</p>
-<p><img src="/image-20210212163929797.png" alt="image-20210212163929797"></p>
+<p><img src="/article/22df6896/image-20210212163929797.png" alt="image-20210212163929797"></p>
 <h3 id="源码分析-2"><a href="#源码分析-2" class="headerlink" title="源码分析"></a>源码分析</h3><p>默认采用非公平锁；</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-title function_">Semaphore</span><span class="hljs-params">(<span class="hljs-type">int</span> <span class="hljs-keyword">permits</span>)</span> &#123;<br>    sync = <span class="hljs-keyword">new</span> <span class="hljs-title class_">NonfairSync</span>(<span class="hljs-keyword">permits</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
 
@@ -87,9 +87,9 @@ border-left-color: #1abc9c;
 <p>想要两个线程之间进行数据交换，必然存在一个交换的时间点，在代码中用exchange来标记交互数据的位置。当两个线程均执行到exchange点时，便开启线程间数据的交换。“交换”二字也客观说明了执行该动作的是至少是两个线程，成对出现。若一个线程到达交换的时间点，而另一个线程并未到达，则该线程进行等待另一个线程。</p>
 <p>其应用场景主要有：遗传算法、多线程数据校对等。</p>
 <p>例子：</p>
-<p><img src="/image-20210212041536863.png" alt="image-20210212041536863"></p>
+<p><img src="/article/22df6896/image-20210212041536863.png" alt="image-20210212041536863"></p>
 <p>输出：</p>
-<p><img src="/image-20210212041847191.png" alt="image-20210212041847191"></p>
+<p><img src="/article/22df6896/image-20210212041847191.png" alt="image-20210212041847191"></p>
 <p>注意事项，在多个线程中（大于两个）使用同一个exchange，导致的结果随机选择到达交换时间点的线程进行信息交换，主要影响因素是CPU的线程调度；</p>
 <h3 id="源码解析"><a href="#源码解析" class="headerlink" title="源码解析"></a>源码解析</h3><figure class="highlight java"><table><tr><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-title function_">Exchanger</span><span class="hljs-params">()</span> &#123;<br>    participant = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Participant</span>();<br>&#125;<br></code></pre></td></tr></table></figure>
 

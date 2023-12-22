@@ -24,7 +24,7 @@ border-left-color: #1abc9c;
 
 <h2 id="命令行添加期望"><a href="#命令行添加期望" class="headerlink" title="命令行添加期望"></a>命令行添加期望</h2><p>官方例子： https://github.com/mock-server/mockserver/blob/master/mockserver-examples/curl_examples.md</p>
 <p>期望添加失败，可能是端口不正确导致；可以用docker ps查看端口；如下图所示，本地访问应该使用32768这个端口；</p>
-<p><img src="/skill-mockserver/image-20231222133537654.png" alt="image-20231222133537654"></p>
+<p><img src="/./skill-mockserver/image-20231222133537654.png" alt="image-20231222133537654"></p>
 <p>例子：</p>
 <p>1、实现简单的接口mock：</p>
 <figure class="highlight kotlin"><table><tr><td class="code"><pre><code class="hljs kotlin">curl -X PUT <span class="hljs-string">&#x27;localhost:1090/mockserver/expectation&#x27;</span> \<br>-d <span class="hljs-string">&#x27;&#123;</span><br><span class="hljs-string">  &quot;httpRequest&quot;: &#123;</span><br><span class="hljs-string">    &quot;method&quot;: &quot;GET&quot;,</span><br><span class="hljs-string">    &quot;path&quot;: &quot;/test&quot;</span><br><span class="hljs-string">  &#125;,</span><br><span class="hljs-string">  &quot;httpResponse&quot;: &#123;</span><br><span class="hljs-string">    &quot;body&quot;: &quot;OK&quot;</span><br><span class="hljs-string">  &#125;</span><br><span class="hljs-string">&#125;&#x27;</span><br></code></pre></td></tr></table></figure>
