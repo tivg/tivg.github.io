@@ -2744,4 +2744,87 @@ lock.lock()：即使调用了线程的interrupt()方法,也没有真正的中断
         <tag>okhttp</tag>
       </tags>
   </entry>
+  <entry>
+    <title>OpenGL干货总结</title>
+    <url>/article/7de12c1b/</url>
+    <content><![CDATA[<p>[TOC]</p>
+<h2 id="图形管线"><a href="#图形管线" class="headerlink" title="图形管线"></a>图形管线</h2><p><img src="/article/7de12c1b/image-20231227165141908.png" alt="image-20231227165141908"></p>
+<br/>
+
+<h2 id="VAO、VBO、IBO-等区别作用"><a href="#VAO、VBO、IBO-等区别作用" class="headerlink" title="VAO、VBO、IBO 等区别作用"></a>VAO、VBO、IBO 等区别作用</h2><p>VAO：顶点数组对象，存储顶点属性指针的配置（如顶点坐标、颜色、纹理坐标等），使得在渲染时可以更有效地切换顶点属性的配置。</p>
+<p>VBO：顶点缓冲对象，存储顶点数据，例如顶点坐标、法线、纹理坐标等。</p>
+<p>EBO&#x2F;IBO：索引缓冲对象，存储图元的索引数据，例如三角形列表或三角形带的索引。</p>
+<p>使用结构数组的方式效率最高。</p>
+<br/>
+
+<h2 id="使用例子"><a href="#使用例子" class="headerlink" title="使用例子"></a>使用例子</h2><figure class="highlight c++"><table><tr><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">// 顶点数据</span><br><span class="hljs-type">float</span> vertices[] = &#123;<br>    <span class="hljs-number">-0.5f</span>, <span class="hljs-number">-0.5f</span>, <span class="hljs-number">0.0f</span>,<br>     <span class="hljs-number">0.5f</span>, <span class="hljs-number">-0.5f</span>, <span class="hljs-number">0.0f</span>,<br>     <span class="hljs-number">0.5f</span>,  <span class="hljs-number">0.5f</span>, <span class="hljs-number">0.0f</span>,<br>    <span class="hljs-number">-0.5f</span>,  <span class="hljs-number">0.5f</span>, <span class="hljs-number">0.0f</span><br>&#125;;<br><br><span class="hljs-comment">// 索引数据</span><br><span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> indices[] = &#123;<br>    <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>,<br>    <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">0</span><br>&#125;;<br><br><span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> VBO, VAO, IBO;<br><span class="hljs-built_in">glGenVertexArrays</span>(<span class="hljs-number">1</span>, &amp;VAO);<br><span class="hljs-built_in">glGenBuffers</span>(<span class="hljs-number">1</span>, &amp;VBO);<br><span class="hljs-built_in">glGenBuffers</span>(<span class="hljs-number">1</span>, &amp;IBO);<br><br><span class="hljs-built_in">glBindVertexArray</span>(VAO);<br><br><span class="hljs-built_in">glBindBuffer</span>(GL_ARRAY_BUFFER, VBO);<br><span class="hljs-built_in">glBufferData</span>(GL_ARRAY_BUFFER, <span class="hljs-built_in">sizeof</span>(vertices), vertices, GL_STATIC_DRAW);<br><br><span class="hljs-built_in">glBindBuffer</span>(GL_ELEMENT_ARRAY_BUFFER, IBO);<br><span class="hljs-built_in">glBufferData</span>(GL_ELEMENT_ARRAY_BUFFER, <span class="hljs-built_in">sizeof</span>(indices), indices, GL_STATIC_DRAW);<br><br><span class="hljs-built_in">glVertexAttribPointer</span>(<span class="hljs-number">0</span>, <span class="hljs-number">3</span>, GL_FLOAT, GL_FALSE, <span class="hljs-number">3</span> * <span class="hljs-built_in">sizeof</span>(<span class="hljs-type">float</span>), (<span class="hljs-type">void</span>*)<span class="hljs-number">0</span>);<br><span class="hljs-built_in">glEnableVertexAttribArray</span>(<span class="hljs-number">0</span>);<br><br><span class="hljs-built_in">glBindBuffer</span>(GL_ARRAY_BUFFER, <span class="hljs-number">0</span>);<br><span class="hljs-built_in">glBindVertexArray</span>(<span class="hljs-number">0</span>);<br><br><span class="hljs-keyword">while</span> (!<span class="hljs-built_in">glfwWindowShouldClose</span>(window)) &#123;<br>    <span class="hljs-built_in">processInput</span>(window);<br><br>    <span class="hljs-built_in">glClearColor</span>(<span class="hljs-number">0.2f</span>, <span class="hljs-number">0.3f</span>, <span class="hljs-number">0.3f</span>, <span class="hljs-number">1.0f</span>);<br>    <span class="hljs-built_in">glClear</span>(GL_COLOR_BUFFER_BIT);<br><br>    <span class="hljs-built_in">glUseProgram</span>(shaderProgram);<br>    <span class="hljs-built_in">glBindVertexArray</span>(VAO);<br>    <span class="hljs-built_in">glDrawElements</span>(GL_TRIANGLES, <span class="hljs-number">6</span>, GL_UNSIGNED_INT, <span class="hljs-number">0</span>);<br><br>    <span class="hljs-built_in">glfwSwapBuffers</span>(window);<br>    <span class="hljs-built_in">glfwPollEvents</span>();<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<h2 id="纹理"><a href="#纹理" class="headerlink" title="纹理"></a>纹理</h2><p>x和y轴坐标范围：0到1，超出则采取环绕方式。</p>
+<table>
+<thead>
+<tr>
+<th>环绕方式</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>GL_REPEAT</td>
+<td>默认，重复纹理图像</td>
+</tr>
+<tr>
+<td>GL_MIRRORED_REPEAT</td>
+<td>重复，镜像放置</td>
+</tr>
+<tr>
+<td>GL_CLAMP_TO_EDGE</td>
+<td>重复边缘，边缘被拉伸的效果</td>
+</tr>
+<tr>
+<td>GL_CLAMP_TO_BORDER</td>
+<td>指定边缘颜色</td>
+</tr>
+</tbody></table>
+<p>纹理过滤：邻近过滤和线性过滤</p>
+<p>远距离物体可以采用多级渐远纹理；</p>
+<p>设置方法：glTexParameteri</p>
+<p>纹理加载方法：stb_image.h</p>
+<p>绑定多个纹理：纹理单元。使用前需激活纹理单元，再将纹理绑定到对应的纹理单元。</p>
+<br/>
+
+<h2 id="向量、矩阵"><a href="#向量、矩阵" class="headerlink" title="向量、矩阵"></a>向量、矩阵</h2><p>点乘：求向量夹角，即cosθ；</p>
+<p>叉乘：求法线；不满足乘法交换律；</p>
+<p>向量的w分量：齐次坐标。增加的w分量主要方便通过矩阵实现向量的缩放、旋转、平移；</p>
+<p>弧度转角度：角度 &#x3D; 弧度 * (180.0f &#x2F; PI)</p>
+<p>角度转弧度：弧度 &#x3D; 角度 * (PI &#x2F; 180.0f)</p>
+<p>GLM数学库例子：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><code class="hljs c++">glm::mat4 mat = glm::<span class="hljs-built_in">mat4</span>(<span class="hljs-number">1.0f</span>)<br>glm::mat4 trans;<br>glm::<span class="hljs-built_in">translate</span>(trans, glm::<span class="hljs-built_in">vec3</span>(<span class="hljs-number">1.0f</span>, <span class="hljs-number">1.0f</span>, <span class="hljs-number">0.0f</span>));<br>glm::<span class="hljs-built_in">rotate</span>(trans, glm::<span class="hljs-built_in">radians</span>(<span class="hljs-number">90.0f</span>), glm::<span class="hljs-built_in">vec3</span>(<span class="hljs-number">0.0</span>, <span class="hljs-number">0.0</span>, <span class="hljs-number">1.0</span>));<br>glm::<span class="hljs-built_in">scale</span>(trans, glm::<span class="hljs-built_in">vec3</span>(<span class="hljs-number">0.5</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.5</span>));<br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<h2 id="MVP矩阵"><a href="#MVP矩阵" class="headerlink" title="MVP矩阵"></a>MVP矩阵</h2><p>MVP&#x3D;Projection×View×Model</p>
+<p>M：局部坐标到世界坐标</p>
+<p>V：世界坐标到观察坐标</p>
+<p>P：观察坐标到裁剪空间</p>
+<p>透视投影：越远越小</p>
+<p>正交投影：大小一致</p>
+<br/>
+
+<h2 id="摄像机坐标方向"><a href="#摄像机坐标方向" class="headerlink" title="摄像机坐标方向"></a>摄像机坐标方向</h2><figure class="highlight c++"><table><tr><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">//相机方向</span><br>glm::vec3 cameraTarget = glm::<span class="hljs-built_in">vec3</span>(<span class="hljs-number">0.0f</span>, <span class="hljs-number">0.0f</span>, <span class="hljs-number">0.0f</span>);<br>glm::vec3 cameraDirection = glm::<span class="hljs-built_in">normalize</span>(cameraPos - cameraTarget);<br><span class="hljs-comment">//相机右轴</span><br>glm::vec3 up = glm::<span class="hljs-built_in">vec3</span>(<span class="hljs-number">0.0f</span>, <span class="hljs-number">1.0f</span>, <span class="hljs-number">0.0f</span>); <br>glm::vec3 cameraRight = glm::<span class="hljs-built_in">normalize</span>(glm::<span class="hljs-built_in">cross</span>(up, cameraDirection));<br><span class="hljs-comment">//上轴</span><br>glm::vec3 cameraUp = glm::<span class="hljs-built_in">cross</span>(cameraDirection, cameraRight);<br></code></pre></td></tr></table></figure>
+
+<p>lookAt矩阵：glm::LookAt函数(位置、目标、上向量）</p>
+<br/>
+
+<br/>
+
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p>https://learnopengl-cn.github.io/</p>
+]]></content>
+      <categories>
+        <category>图形API</category>
+      </categories>
+      <tags>
+        <tag>OpenGL</tag>
+      </tags>
+  </entry>
 </search>
