@@ -3004,4 +3004,36 @@ lock.lock()：即使调用了线程的interrupt()方法,也没有真正的中断
         <tag>okhttp</tag>
       </tags>
   </entry>
+  <entry>
+    <title>apk瘦身</title>
+    <url>/article/f218b4be/</url>
+    <content><![CDATA[<p>[TOC]</p>
+<br/>
+
+<h2 id="缩减代码资源"><a href="#缩减代码资源" class="headerlink" title="缩减代码资源"></a>缩减代码资源</h2><p>混淆，配置 ProGuard 或 R8</p>
+<p>R 文件内联</p>
+<br/>
+
+<h2 id="减小-res-资源大小"><a href="#减小-res-资源大小" class="headerlink" title="减小 res 资源大小"></a>减小 res 资源大小</h2><p>删除冗余的资源</p>
+<p>重复资源的优化</p>
+<p>图片压缩</p>
+<p>矢量图代替位图</p>
+<p>资源混淆</p>
+<p>指定语言</p>
+<br/>
+
+<h2 id="减小-so-库资源大小"><a href="#减小-so-库资源大小" class="headerlink" title="减小 so 库资源大小"></a>减小 so 库资源大小</h2><p>自己编译 so（添加优化标志，例如GCC 的 –gc-sections）</p>
+<p>编译指定平台架构的 so</p>
+<p>动态下发 so</p>
+<br/>
+
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>https://tech.meituan.com/2017/04/07/android-shrink-overall-solution.html</p>
+<br/>]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+      <tags>
+        <tag>apk</tag>
+      </tags>
+  </entry>
 </search>
